@@ -1,0 +1,22 @@
+
+###
+GET http://localhost:3000/
+
+### signup
+POST http://localhost:3000/auth/signup
+Content-Type:application/json
+
+
+{
+    "username":"Soham3",
+    "password":"123"
+}
+
+### login
+POST http://localhost:3000/auth/login
+
+###refresh-token
+POST http://localhost:3000/auth/refresh-token
+
+###logut
+DELETE http://localhost:3000/auth/logout
