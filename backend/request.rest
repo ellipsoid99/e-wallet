@@ -8,12 +8,18 @@ Content-Type:application/json
 
 
 {
-    "username":"Soham3",
-    "password":"123"
+    "username":"SohamBiswas3",
+    "password":"12345"
 }
 
 ### login
 POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username":"SohamBiswas4",
+    "password":"12345"
+}
 
 ###refresh-token
 POST http://localhost:3000/auth/refresh-token
