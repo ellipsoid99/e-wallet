@@ -1,5 +1,4 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
 import styles from "../styles/components/Hero.module.scss";
 
 const Carousal = () => {
@@ -12,7 +11,7 @@ const Carousal = () => {
           &lt;/&gt;
           <br />
           <h4 className={styles.subtext}>
-            Because we're able to deliver the banking experience you deserve
+            Because we are able to deliver the banking experience you deserve
           </h4>
         </h3>
       </div>

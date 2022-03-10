@@ -220,9 +220,6 @@ function SignUp() {
         <button type="submit">SIGN UP</button>
         <div className={styles["signup-required"]}>
           <span className={styles["signup-text"]}>Already Registered?</span>
-          {/* <Link to="/login" className={styles["link-style"]}>
-            Sign in
-          </Link> */}
         </div>
       </div>
     </form>
