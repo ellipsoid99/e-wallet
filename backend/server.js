@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const createError=require('http-errors')
 const mongoose = require('mongoose')
 require('dotenv').config()
-
+const {verifyAccessToken} = require('./helper/jwt_helper')
 const authRoute = require('./Routes/Authroute')
 
 const app=express()
@@ -47,7 +47,8 @@ process.on('SIGINT',async()=>{
     await mongoose.connection.close();
     process.exit(0)
 })
-app.get('/',async(req,res,next)=>{
+app.get('/',verifyAccessToken,async(req,res,next)=>{
+    console.log(req.headers['authorization'])
     res.send('HOME PAGE')
 });
 

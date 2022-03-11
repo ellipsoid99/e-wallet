@@ -7,6 +7,10 @@ const UserSchema = new Schema ({
         type: String,
         required:true
     },
+    accountNumber:{
+        type:String,
+        required:true
+    },
     password:{
         type:String,
         required:true

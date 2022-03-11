@@ -1,6 +1,7 @@
 
 ###
 GET http://localhost:3000/
+Authorization:Bearer eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDY5Nzc4MDAsImV4cCI6MTY0Njk3NzgxNSwiYXVkIjoiNjIyODdlYmYxYzZlNDlhN2ZhOGExN2ZjIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.cemHNRHj4tA3HU550lf8g_ZrGcwmkN93MpEH5CAqayg
 
 ### signup
 POST http://localhost:3000/auth/signup
@@ -9,7 +10,8 @@ Content-Type:application/json
 
 {
     "username":"SohamBiswas3",
-    "password":"12345"
+    "accountNumber":"wqer",
+    "password":"12346"
 }
 
 ### login
@@ -17,12 +19,22 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username":"SohamBiswas4",
-    "password":"12345"
+    "username":"SohamBiswas3",
+    "password":"12346"
 }
 
 ###refresh-token
 POST http://localhost:3000/auth/refresh-token
+Content-Type: application/json
 
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDY5Nzg2NzYsImV4cCI6MTY0NzAyMTg3NiwiYXVkIjoiNjIyODdlYmYxYzZlNDlhN2ZhOGExN2ZjIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.j8TVllL_l-XSdsneE91a67Kcfooa2l0HQMe6_EjA7AY"
+}
 ###logut
 DELETE http://localhost:3000/auth/logout
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDY5Nzk1MTgsImV4cCI6MTY3ODUzNzExOCwiYXVkIjoiNjIyODdlYmYxYzZlNDlhN2ZhOGExN2ZjIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.GmyEDlHi7jWRaHio80mhEK5yH36AiBt_U00mZe026bI"
+    
+}
