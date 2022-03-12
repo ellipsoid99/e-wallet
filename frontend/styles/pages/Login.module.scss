@@ -1,4 +1,6 @@
 .heading-signin {
+  color: white;
+  text-align: center;
   margin: 0;
   font-family: "Open Sans";
   font-size: 20px;
@@ -15,12 +17,13 @@
       label {
         display: flex;
         align-items: center;
-        color: black;
+        color: white;
         padding: 0 0.5em;
         border: 1px solid #bdc0e5;
         border-right: 0px;
         border-radius: 2px 0px 0px 2px;
-        background-color: #ffffff;
+        background-color: transparent;
+
         font-family: inherit;
         font-size: 13px;
         min-width: 82px;
@@ -34,7 +37,7 @@
         }
       }
       input {
-        color: #1c1953;
+        color: white;
         font-family: inherit;
         -webkit-appearance: none;
         width: 100%;
@@ -42,7 +45,8 @@
         padding: 9px 16px 10px 16px;
         border: 1px solid #bdc0e5;
         border-radius: 0px 2px 2px 0px;
-        background-color: #ffffff;
+        background-color: transparent;
+
         &:focus {
           outline: none;
         }
@@ -60,12 +64,15 @@
   }
 }
 .forgot-password {
-  color: #3237b5;
+  color: white;
   font-family: "Open Sans";
   font-size: 14px;
   text-align: right;
   cursor: pointer;
   margin-top: 16px;
+  &:hover {
+    // transform: scale(1.5);
+  }
 }
 .sign-in-button {
   border: none;
@@ -75,10 +82,18 @@
   margin-top: 24px;
   background-color: black;
   color: white;
+  background-color: transparent;
   width: 100%;
-  box-shadow: 0 2px 4px 0 rgba(28, 25, 83, 0.61);
+  border: 1px solid white;
+  // box-shadow: 0 2px 4px 0 rgba(28, 25, 83, 0.61);
   font-family: "Open Sans";
   font-size: 14px;
+  &:hover {
+    background-color: invert($color: black);
+    color: invert($color: white);
+    transition: all ease-in-out 0.5s;
+    border-radius: 5px;
+  }
 }
 
 .message {
