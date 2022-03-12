@@ -11,12 +11,15 @@
   background-position: center center;
   padding: 0 2rem;
 }
-
+.mainRow {
+  // padding-right: 5em;
+}
 .login-form-container {
   width: 400px;
   border-radius: 4px;
-  background-color: white;
-  box-shadow: 0 2px 4px 0 rgba(28, 25, 83, 0.61);
+  background-color: transparent;
+  border: 1px solid white;
+  // box-shadow: 0 2px 4px 0 rgba(28, 25, 83, 0.61);
   padding: 1.5em;
   margin: 0 auto;
   display: flex;
@@ -29,12 +32,16 @@
   margin-top: 32px;
   font-family: var(--global-body-FontFamily);
   .signup-text {
-    color: #1c1953;
+    text-transform: uppercase;
+    // color: #1c1953;
+    color: white;
     font-size: 16px;
   }
   .link-style {
+    text-transform: uppercase;
     cursor: pointer;
-    color: #3237b5;
+    // color: #3237b5;
+    color: white;
     font-size: 14px;
     text-decoration: none;
   }

@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Container fluid>
-        <Row>
+        <Row className={styles.mainRow}>
           <Col sm={8}>
             <Hero />
           </Col>

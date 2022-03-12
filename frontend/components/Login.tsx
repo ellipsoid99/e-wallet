@@ -53,9 +53,7 @@ function LogIn() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h6 className={`text-muted ${styles["heading-signin"]}`}>
-        Sign in to your account
-      </h6>
+      <h6 className={`${styles["heading-signin"]}`}>Sign in to your account</h6>
       <div className={styles["input-fields"]}>
         <div className={styles["input-fields-container"]}>
           <div className={styles["input-container"]}>
@@ -95,12 +93,6 @@ function LogIn() {
             <p className={styles["errorLabel"]}>{errors?.password.message}</p>
           )}
         </div>
-      </div>
-      <div
-        className={styles["forgot-password"]}
-        onClick={directUserOnForgotPassword}
-      >
-        Forgot your password?
       </div>
       <button className={styles["sign-in-button"]} type="submit">
         SIGN IN
