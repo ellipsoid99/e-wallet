@@ -1,7 +1,7 @@
 
 ###
 GET http://localhost:3000/
-Authorization:Bearer eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDY5Nzc4MDAsImV4cCI6MTY0Njk3NzgxNSwiYXVkIjoiNjIyODdlYmYxYzZlNDlhN2ZhOGExN2ZjIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.cemHNRHj4tA3HU550lf8g_ZrGcwmkN93MpEH5CAqayg
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDY5ODg5MTksImV4cCI6MTY0NzAzMjExOSwiYXVkIjoiNjIyYjBkZWI5ZGViMmFlZDEzZGMwMDMyIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.iImXhRIW5MZWCOlBQdcqaYfCkzKfCJcNLf83VIqcc9k
 
 ### signup
 POST http://localhost:3000/auth/signup
@@ -9,8 +9,7 @@ Content-Type:application/json
 
 
 {
-    "username":"SohamBiswas3",
-    "accountNumber":"wqer",
+    "username":"SohamBiswas4",
     "password":"12346"
 }
 
@@ -19,7 +18,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username":"SohamBiswas3",
+    "username":"SohamBiswas4",
     "password":"12346"
 }
 
