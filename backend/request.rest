@@ -1,16 +1,16 @@
 
 ###
 GET http://localhost:3000/
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDY5ODg5MTksImV4cCI6MTY0NzAzMjExOSwiYXVkIjoiNjIyYjBkZWI5ZGViMmFlZDEzZGMwMDMyIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.iImXhRIW5MZWCOlBQdcqaYfCkzKfCJcNLf83VIqcc9k
-
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDcxNDg3NjQsImV4cCI6MTY0NzE5MTk2NCwiYXVkIjoiNjIyY2NkZmFlNjg1MTkxYzJmY2IxNjMxIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.aFx4kINRtnHYk415gqnoSNdzhDm1NiX3PykDplBxSgQ
 ### signup
 POST http://localhost:3000/auth/signup
 Content-Type:application/json
 
 
 {
-    "username":"SohamBiswas4",
-    "password":"12346"
+    "firstname":"asd",
+    "lastname":"asdf",
+    "password":"12345678"
 }
 
 ### login
@@ -18,8 +18,9 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username":"SohamBiswas4",
-    "password":"12346"
+    "firstname":"asd",
+    "lastname":"asdf",
+    "password":"12345678"
 }
 
 ###refresh-token

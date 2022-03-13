@@ -3,7 +3,15 @@ const Schema=mongoose.Schema
 const bcrypt=require('bcrypt')
 
 const UserSchema = new Schema ({
-    username:{
+    accountNumber:{
+        type:Number,
+        required:false
+    },
+    firstname:{
+        type: String,
+        required:true
+    },
+    lastname:{
         type: String,
         required:true
     },
@@ -15,6 +23,10 @@ const UserSchema = new Schema ({
         type:Number,
         required:false,
         default:0.0
+    },
+    transactions:{
+        type:Object,
+        required:false
     }
 })
 
@@ -24,7 +36,7 @@ UserSchema.pre('save',async function(next){
         const hasedPassword= await bcrypt.hash(this.password,salt)
         this.password=hasedPassword
         next()
-        console.log(this.username,this.password)
+        // console.log(this.username,this.password)
     }
     catch(error){
         next(error)
