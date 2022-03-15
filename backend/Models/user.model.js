@@ -3,9 +3,10 @@ const Schema=mongoose.Schema
 const bcrypt=require('bcrypt')
 
 const UserSchema = new Schema ({
-    accountNumber:{
+    accountnumber:{
         type:Number,
-        required:false
+        required:false,
+        default:0
     },
     firstname:{
         type: String,
@@ -18,6 +19,11 @@ const UserSchema = new Schema ({
     password:{
         type:String,
         required:true
+    },
+    phoneNumber:{
+        type:Number,
+        required:false,
+        default:0
     },
     balance:{
         type:Number,

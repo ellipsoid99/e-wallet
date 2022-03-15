@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const createError=require('http-errors')
 const User = require('../Models/user.model')
+const AccountNumber = require('../Models/acc_number')
 const {authSchema}=require('../helper/validation_schema')
 const {signAccessToken,signRefreshToken,verifyRefreshToken}=require('../helper/jwt_helper')
 const { sign } = require('jsonwebtoken')
@@ -12,13 +13,31 @@ router.post('/signup',async(req,res,next)=>{
     
     try{
     
-        const result = await authSchema.validateAsync(req.body)
+        var result = await authSchema.validateAsync(req.body)
         // console.log(result)
         
         // const doesExist = await User.findOne({accountNumber:result.accountNumber})
         // if(doesExist)
         //     throw createError.Conflict(`${result.accountNumber} is already a registered user`)
+        
+        var accNum=await AccountNumber.findOne({index:"1"})
+        console.log(accNum.accountNumber)
+        console.log(typeof accNum.accountNumber)
 
+        var val=accNum.accountNumber+1;
+        console.log(val)
+        AccountNumber.findOneAndUpdate(
+                {index:"1"},
+                {$set:{accountNumber:val}},
+                {new:true},
+                (err,doc)=>{
+                    if(err)
+                        console.log(err)
+                    console.log(doc);
+                }
+            );
+        
+        result.accountnumber=val
         const user = new User(result)
         const savedUser = await user.save()
         const accessToken = await signAccessToken(savedUser.id)
@@ -41,7 +60,7 @@ router.post('/login',async(req,res,next)=>{
     try {
         
         const result = await authSchema.validateAsync(req.body)
-        const user = await User.findOne({firstname:result.firstname})
+        const user = await User.findOne({accountnumber:result.accountnumber})
         
         if(!user)
         {
@@ -55,6 +74,7 @@ router.post('/login',async(req,res,next)=>{
         const accessToken = await signAccessToken(user.id)
         // const refreshToken = await signRefreshToken(user.id)
         // res.send({accessToken,refreshToken})
+        console.log(user)
         res.send({accessToken})
 
 

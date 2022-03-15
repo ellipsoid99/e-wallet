@@ -47,6 +47,7 @@ process.on('SIGINT',async()=>{
     await mongoose.connection.close();
     process.exit(0)
 })
+
 app.get('/',verifyAccessToken,async(req,res,next)=>{
     console.log(req.headers['authorization'])
     res.send('HOME PAGE')
