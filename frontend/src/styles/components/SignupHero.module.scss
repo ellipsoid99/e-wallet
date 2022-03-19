@@ -1,0 +1,47 @@
+@use "../mixins.scss" as *;
+
+.container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  @include flexBox(row, center, center);
+  background-image: url("https://images.pexels.com/photos/129492/pexels-photo-129492.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.top-area {
+  width: 90%;
+  height: 100vh;
+  @include flexBox(row, center, center);
+
+  .left-area {
+    color: white;
+    width: 100%;
+    padding-left: 2em;
+    @include flexBox(row, flex-start, center);
+    .heading {
+      transform: translateY(40%);
+      font-family: "Open Sans", sans-serif;
+      text-transform: uppercase;
+      word-spacing: -10px;
+      .text-para-1 {
+        font-size: 100px;
+        line-height: 0.7em;
+        .text-para-2 {
+          font-size: 50px;
+          letter-spacing: 3px;
+        }
+        .text-para-muted {
+          color: #6c757d;
+        }
+      }
+    }
+  }
+}
+
+.right-area {
+  width: 60%;
+}
