@@ -43,7 +43,7 @@ router.post('/signup',async(req,res,next)=>{
         const accessToken = await signAccessToken(savedUser.id)
         // const refreshToken=await signRefreshToken(savedUser.id)
         // res.send({accessToken,refreshToken})
-        res.send({accessToken})
+        res.send({accessToken,val})
         // res.send(savedUser)
         // res.send("signup route")
     }
