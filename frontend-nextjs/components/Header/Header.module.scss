@@ -1,0 +1,25 @@
+.header {
+    padding: 8px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    // margin-bottom: 16px;
+    border: 1px solid #dde2e4;
+    // border-radius: 2px;
+    background-color: #ffffff;
+}
+.logo {
+    height: 48px;
+    width: 48px;
+    border-radius: 12px;
+    background: linear-gradient(39.63deg, #adda00 0%, #006362 100%);
+}
+.rightSideHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > div,
+    button {
+        margin: 0 8px;
+    }
+}

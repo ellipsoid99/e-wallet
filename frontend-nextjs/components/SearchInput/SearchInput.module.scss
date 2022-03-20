@@ -1,0 +1,30 @@
+.inputHolder {
+    height: 37px;
+    width: 305px;
+    border: 1px solid #d6dfed;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 8.5px 8.5px 8.5px 12.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    input {
+        color: #777b83;
+        font-family: Poppins Regular;
+        font-size: 12px;
+        letter-spacing: 0;
+        padding: 0;
+        border: 0;
+    }
+    .iconButton {
+        background-color: transparent;
+        border: 0;
+        height: 24px;
+        width: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #110c59;
+        margin: 0;
+    }
+}

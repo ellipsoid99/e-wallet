@@ -1,0 +1,155 @@
+.formContainer {
+    // height: 392px;
+    width: 380px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(28, 25, 83, 0.61);
+    padding: 24px;
+    margin: 32px;
+    display: flex;
+    flex-direction: column;
+    h6 {
+        margin: 0;
+        color: #1c1953;
+        font-family: "Poppins Medium";
+        font-size: 18px;
+    }
+    .inputFields {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        margin-top: 32px;
+        .inputFieldsContainer {
+            .inputContainer {
+                display: flex;
+                label {
+                    display: flex;
+                    align-items: center;
+                    margin: 0px;
+                    color: #8e92c3;
+                    padding: 9px 16px 10px 16px;
+                    border: 0.8px solid #bdc0e5;
+                    border-right: 0px;
+                    border-radius: 2px 0px 0px 2px;
+                    background-color: #ffffff;
+                    font-family: "Poppins Regular";
+                    font-size: 13px;
+                    min-width: 115px;
+                    white-space: nowrap;
+                    sup {
+                        color: red;
+                        font-size: 13px;
+                        margin-left: 4px;
+                    }
+                    &.invalid {
+                        border-color: red;
+                    }
+                    &.phoneLabel {
+                        justify-content: space-between;
+                        padding-right: 4px;
+                        // min-width: 92px;
+                        .plus {
+                            display: flex;
+                            color: #1c1953;
+                            position: relative;
+                            top: 1px;
+                        }
+                    }
+                }
+                input {
+                    color: #1c1953;
+                    font-family: "Poppins Regular";
+                    -webkit-appearance: none;
+                    width: 100%;
+                    font-size: 13px;
+                    padding: 9px 16px 10px 16px;
+                    border: 0.8px solid #bdc0e5;
+                    border-radius: 0px 2px 2px 0px;
+                    background-color: #ffffff;
+                    &:focus {
+                        outline: none;
+                    }
+                    &.invalid {
+                        border-color: red;
+                    }
+                    &.countrycode {
+                        width: 50px;
+                        padding: 0 10px;
+                        border-right: 0;
+                        border-radius: 0;
+                        text-align: center;
+                    }
+                }
+                input[name="password"] {
+                    border-radius: 0px;
+                }
+                input[type="text"] + .passwordState {
+                    i {
+                        transform: rotate(90deg);
+                    }
+                }
+                .passwordState {
+                    padding: 9px 16px 10px 16px;
+                    border: 0.8px solid #bdc0e5;
+                    border-radius: 0px 2px 2px 0px;
+                    background-color: #ffffff;
+                    border-left: 0px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    color: rgba(28, 25, 100, 0.61);
+                    i {
+                        font-size: 18px;
+                    }
+                }
+            }
+            .errorLabel {
+                font-size: 12px;
+                color: #ff656b;
+                margin: 8px 0px 0px 0px;
+                font-family: "Poppins Regular";
+            }
+        }
+    }
+    .forgotPassword {
+        color: #3237b5;
+        font-family: "Poppins Regular";
+        font-size: 14px;
+        text-align: right;
+        cursor: pointer;
+        margin-top: 16px;
+    }
+    button {
+        border: none;
+        border-radius: 2px;
+        padding: 10px;
+        cursor: pointer;
+        margin-top: 24px;
+        background-color: #f8e71c;
+        box-shadow: 0 2px 4px 0 rgba(28, 25, 83, 0.61);
+        color: #1c1953;
+        font-family: "Poppins Medium";
+        font-size: 14px;
+    }
+    .signupRequired {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 32px;
+        font-family: "Poppins Regular";
+        .signupText {
+            color: #1c1953;
+            font-size: 16px;
+        }
+        .linkStyle {
+            color: #3237b5;
+            font-size: 14px;
+            text-decoration: none;
+        }
+    }
+}
+.message {
+    color: white;
+    text-align: center;
+    font-family: "Poppins Regular";
+    margin-bottom: 4px;
+}
