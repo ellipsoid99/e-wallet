@@ -5,7 +5,7 @@ const authSchema = Joi.object({
     firstname:Joi.string().min(3),
     lastname:Joi.string().min(3),
     password:Joi.string().min(8).required(),
-    // phoneNumber:Joi.number(),
+    phoneNumber:Joi.string().length(10).pattern(/^[0-9]+$/)
     // balance:Joi.number(),
 
 })

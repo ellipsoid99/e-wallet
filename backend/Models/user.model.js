@@ -30,10 +30,6 @@ const UserSchema = new Schema ({
         required:false,
         default:0.0
     },
-    transactions:{
-        type:Object,
-        required:false
-    }
 })
 
 UserSchema.pre('save',async function(next){

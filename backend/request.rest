@@ -1,16 +1,19 @@
 
 ###
 GET http://localhost:3000/
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDcxNDg3NjQsImV4cCI6MTY0NzE5MTk2NCwiYXVkIjoiNjIyY2NkZmFlNjg1MTkxYzJmY2IxNjMxIiwiaXNzIjoiZS13YWxsZXQuY29tIn0.aFx4kINRtnHYk415gqnoSNdzhDm1NiX3PykDplBxSgQ
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDczMjQ4ODYsImV4cCI6MTY0NzM2ODA4NiwiYXVkIjoiNjIzMDJlY2QwYWNjMjdiNmUxMTg2ODE1IiwiaXNzIjoiZS13YWxsZXQuY29tIn0.w8YCZbY74vKlAXWUiQrqikWKcNfL7set_o5Ji9oa4zo
 ### signup
 POST http://localhost:3000/auth/signup
 Content-Type:application/json
 
 
 {
-    "firstname":"asd",
-    "lastname":"asdf",
-    "password":"12345678"
+    "firstname":"soham",
+    "lastname":"biswas2",
+    "password":"12345678",
+    "phoneNumber":"6290883956"
+
+    
 }
 
 ### login
@@ -18,7 +21,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "accountnumber":10990003,
+    "accountnumber":10990005,
     "password":"12345678"
 }
 
