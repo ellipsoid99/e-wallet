@@ -1,6 +1,6 @@
 # e-wallet
-working of an e-wallet system
 
+working of an e-wallet system
 
 USER SCHEMA{
 
@@ -10,5 +10,7 @@ USER SCHEMA{
     lastname
     balance
     transactions obj
-    
+
 }
+
+Test

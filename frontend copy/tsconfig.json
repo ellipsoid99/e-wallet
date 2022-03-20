@@ -1,20 +1,38 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/auth/signup.tsx"],
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["es5", "dom", "dom.iterable", "esnext"],
+        "types": ["cypress"],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "baseUrl": "./",
+        "paths": {
+            "@/components/*": ["components/*"],
+            "@/services/*": ["services/*"],
+            "@/actions": ["actions"],
+            "@/constants": ["constants/*"],
+            "@/reducers": ["reducers/*"],
+            "@/svg": ["public/icons/svg"],
+            "@/data/*": ["data/*"],
+            "@/styles/*": ["styles/*"],
+            "@/typography/*": ["public/fonts/*"]
+        }
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "pages/api/auth/[...nextauth]Old.ts123"
+    ],
+    "exclude": ["node_modules"]
 }

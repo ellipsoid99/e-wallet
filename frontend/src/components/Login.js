@@ -16,10 +16,10 @@ const Login = () => {
   } = useForm({ mode: "onSubmit" });
 
   const signInWithCredentials = async (data) => {
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
-      return setError("email", {
+    if (!/^[0-9]*$/.test(data.accountNumber)) {
+      return setError("account-number", {
         type: "onSubmit",
-        message: "Email Address must be valid",
+        message: "Enter Valid Account Number",
       });
     }
     // const signInSession = await signIn("credentials", {

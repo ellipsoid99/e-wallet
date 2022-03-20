@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../reducers/actions";
+
 // import { Link, useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 // import Api from "../../../common-components/Api";
@@ -13,19 +16,20 @@ function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "all" });
-  const [userInfo, setUserInfo] = useState();
+  const dispatch = useDispatch();
   const [passwordState, changeState] = useState(false);
 
   const onSubmit = (data) => {
-    setUserInfo(data);
     const body = {
       first_name: data.firstname,
       last_name: data.lastname,
-      username: data.username,
-      email: data.email,
+      // username: data.username,
+      // email: data.email,
       password: data.password,
-      contact: data.countrycode + data.phone,
+      // contact: data.countrycode + data.phone,
     };
+    dispatch(userActions.signUpUser("/user", "", body, false));
+
     // Api("post", "user", body).then((res) => {
     //   if (res) {
     //     if (res.data["context_code"] == 1000) {
@@ -108,7 +112,7 @@ function SignUp() {
               <p className={styles["errorLabel"]}>{errors?.lastname.message}</p>
             )}
           </div>
-          <div className={styles["input-fields-container"]}>
+          {/* <div className={styles["input-fields-container"]}>
             <div className={styles["input-container"]}>
               <label
                 htmlFor="email"
@@ -132,8 +136,8 @@ function SignUp() {
             {errors?.email && (
               <p className={styles["errorLabel"]}>{errors?.email.message}</p>
             )}
-          </div>
-          <div className={styles["input-fields-container"]}>
+          </div> */}
+          {/* <div className={styles["input-fields-container"]}>
             <div className={styles["input-container"]}>
               <label
                 htmlFor="phone"
@@ -182,7 +186,7 @@ function SignUp() {
                 {errors?.phone?.message || errors?.countrycode?.message}
               </p>
             )}
-          </div>
+          </div> */}
           <div className={styles["input-fields-container"]}>
             <div className={styles["input-container"]}>
               <label

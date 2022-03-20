@@ -1,6 +1,19 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-};
+const withReactSvg = require("next-react-svg");
+const path = require("path");
 
-module.exports = nextConfig;
+(module.exports = withReactSvg({
+  include: path.resolve(__dirname, "public/icons/svg"),
+  webpack(config, options) {
+    return config;
+  },
+})),
+  {
+    reactStrictMode: true,
+    env: {
+      BASE_URL: process.env.BASE_URL,
+      REACT_APP_BASE_URL: "http://localhost:4000",
+    },
+    future: {
+      webpack5: true,
+    },
+  };

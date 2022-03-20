@@ -1,34 +1,27 @@
 import type { NextPage } from "next";
-import { Container, Row, Col } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import styles from "../styles/pages/Home.module.scss";
-import Hero from "../components/Hero";
-
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SessionService from "@/services/Session";
+import WelcomeContainer from "@/components/Welcome";
 
 const Home: NextPage = () => {
-  return (
-    <div className={styles.container}>
-      <Container fluid>
-        <Row className={styles.mainRow}>
-          <Hero />
-        </Row>
-        <Row className={styles.buttonRow}>
-          <Col className={styles.buttonCol1}>
-            <Link href="/auth/login">
-              <button className={styles["btn-animation"]}>Login</button>
-            </Link>
-          </Col>
-          <Col className={styles.buttonCol2}>
-            <Link href="/auth/signup">
-              <button className={styles["btn-animation"]}>Sign-Up</button>
-            </Link>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
+    // const { data: session, status } = SessionService();
+    // const router = useRouter();
+    // // const userInfo = useSelector((state: any = {}) => state.users.items);
+    // useEffect(() => {
+    //     if (!session && router.route !== "/login") {
+    //         router.push("/login");
+    //     } else {
+    //         router.push("/user-management");
+    //     }
+    // }, [session, router]);
+
+    return (
+        <div>
+            <WelcomeContainer />
+        </div>
+    );
 };
 
 export default Home;
