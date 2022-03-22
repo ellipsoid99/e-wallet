@@ -16,7 +16,6 @@ import styles from "../../styles/Auth.module.scss";
 type FormInputs = {
   firstname: any;
   lastname: any;
-  email: any;
   password: any;
   phone: number;
   countrycode: number;
@@ -50,11 +49,10 @@ function SignUp() {
     const body = {
       first_name: data.firstname,
       last_name: data.lastname,
-      email: data.email,
       password: data.password,
       contact: data.countrycode + data.phone,
     };
-    dispatch(userActions.signUpUser("/user", "", body, false));
+    dispatch(userActions.signUpUser("/user", body, false));
     // postAPI("/user", sessionObj.accessToken, body).then((res) => {
     //     console.log("res", res);
     // });
@@ -178,31 +176,6 @@ function SignUp() {
               </div>
               {errors?.lastname && (
                 <p className={styles.errorLabel}>{errors?.lastname.message}</p>
-              )}
-            </div>
-            <div className={styles.inputFieldsContainer}>
-              <div className={styles.inputContainer}>
-                <label
-                  htmlFor="email"
-                  className={`${errors?.email && styles.invalid}`}
-                >
-                  Email ID <sup>*</sup>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className={`${errors?.email && styles.invalid}`}
-                  {...register("email", {
-                    required: "Email Address Required",
-                    pattern: {
-                      value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                      message: "Email must be a valid email address",
-                    },
-                  })}
-                ></input>
-              </div>
-              {errors?.email && (
-                <p className={styles.errorLabel}>{errors?.email.message}</p>
               )}
             </div>
             <div className={styles.inputFieldsContainer}>

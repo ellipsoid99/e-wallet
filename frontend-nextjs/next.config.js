@@ -11,7 +11,7 @@ const path = require("path");
     reactStrictMode: true,
     env: {
       BASE_URL: process.env.BASE_URL,
-      REACT_APP_BASE_URL: "http://localhost:4000",
+      REACT_APP_BASE_URL: "http://localhost:3000",
     },
     future: {
       webpack5: true,

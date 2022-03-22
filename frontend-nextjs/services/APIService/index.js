@@ -7,6 +7,7 @@ let httpOptions = {
   "Content-Type": "application/json",
   Accept: "application/json",
   "X-Language": "en",
+  "Access-Control-Allow-Origin": "*",
 };
 /*
 @type endpoint:string as '/user'
@@ -14,9 +15,10 @@ let httpOptions = {
 **/
 const getAPI = async (endpoint, token) => {
   if (token && token.length > 0) {
-    httpOptions.Authorization = `Bearer ${token}`;
+    // httpOptions.Authorization = `Bearer ${token}`;
     try {
-      const URL = `${baseURL}${endpoint}`;
+      //   const URL = `${baseURL}${endpoint}`;
+      const URL = `http://localhost:3000/auth/login`;
       const response = await axios.get(URL, { headers: httpOptions });
       if (response?.data?.context_code === 1000 && response?.data?.data) {
         return response;
@@ -33,17 +35,18 @@ const getAPI = async (endpoint, token) => {
 @type token:string as 'string'
 @type data:object as {'name':'John Doe', 'password': 'John@123'}
 **/
-const postAPI = async (endpoint, token, data, tokenRequired = true) => {
+const postAPI = async (endpoint, data, tokenRequired = true) => {
   if (data !== null) {
-    if (!tokenRequired) {
-      delete httpOptions["Authorization"];
-    }
-    if (tokenRequired && token && token.length > 0) {
-      httpOptions.Authorization = `Bearer ${token}`;
-    }
+    // if (!tokenRequired) {
+    //   delete httpOptions["Authorization"];
+    // }
+    // if (tokenRequired && token && token.length > 0) {
+    //   httpOptions.Authorization = `Bearer ${token}`;
+    // }
 
     try {
-      const URL = `${baseURL}${endpoint}`;
+      //   const URL = `${baseURL}${endpoint}`;
+      const URL = `http://localhost:3000/auth/signup`;
       const response = await axios.post(URL, data, {
         headers: httpOptions,
       });
@@ -51,7 +54,7 @@ const postAPI = async (endpoint, token, data, tokenRequired = true) => {
         return response;
       }
     } catch (error) {
-      console.error("getAPI error", error);
+      console.error("postAPI error", error);
       throw error;
     }
   }

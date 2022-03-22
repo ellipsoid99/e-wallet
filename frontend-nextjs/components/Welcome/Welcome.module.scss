@@ -1,13 +1,18 @@
-.info {
-    color: #ffffff;
-    font-family: "Poppins Medium";
-    font-size: 36px;
-    font-weight: 600;
-    margin: 32px;
-    div {
-        font-size: 18px;
-        width: 50%;
-        font-family: "Poppins Regular";
-        line-height: 32px;
+.container {
+  height: 80%;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-color: blue;
+  .supertext {
+    color: white;
+    .subtext {
+      padding-left: 6px;
+      text-transform: uppercase;
+      font-size: 0.2em;
+      line-height: 0.8em;
     }
+  }
 }

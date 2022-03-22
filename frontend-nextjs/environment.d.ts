@@ -2,10 +2,10 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       GITHUB_AUTH_TOKEN: string;
-      NODE_ENV: "development" | "production";
-      NEXTAUTH_API_URL: "http://localhost:4000";
-      API_URL: "http://localhost:4000";
-      REACT_APP_BASE_URL: "http://localhost:4000";
+      // NODE_ENV: "development" | "production";
+      NEXTAUTH_API_URL: "http://localhost:3000";
+      API_URL: "http://localhost:3000";
+      REACT_APP_BASE_URL: "http://localhost:3000";
       PORT?: string;
       PWD: string;
     }

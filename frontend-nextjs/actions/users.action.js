@@ -11,19 +11,18 @@ const SUCCESS_CODE = 1000;
 const ERROR_CODE = 1100;
 const TOKEN_NOT_VALID = "token_not_valid";
 
-function signUpUser(endpoint, token, data, tokenRequired) {
+function signUpUser(endpoint, data, tokenRequired) {
   return (dispatch) => {
     dispatch(request(data.username));
     if (
       data &&
       data.first_name &&
       data.last_name &&
-      data.email &&
       data.password &&
       data.contact
     ) {
       const signUpAPI = endpoint;
-      postAPI(signUpAPI, "", data, tokenRequired).then(
+      postAPI(signUpAPI, "", data).then(
         (user) => {
           if (user?.data?.context_code === SUCCESS_CODE) {
             console.log("user", user);
@@ -74,9 +73,9 @@ export const getUser = (sessionObj) => (dispatch, getState) => {
     console.log("state in users action", state);
     // return;
   }
-  const userInfoAPI = `/user/${sessionObj?.user?.email}`;
-  const accessToken = sessionObj?.accessToken;
-  getAPI(userInfoAPI, accessToken).then(
+  const userInfoAPI = `/user/${sessionObj?.user?.accountNumber}`;
+  //   const accessToken = sessionObj?.accessToken;
+  getAPI(userInfoAPI).then(
     (user) => {
       // return dispatch(success(user?.data?.data));
       dispatch(setUser(user?.data?.data));
@@ -92,6 +91,22 @@ export const getUser = (sessionObj) => (dispatch, getState) => {
       return Router.push("/login");
     },
   );
+  //   getAPI(userInfoAPI, accessToken).then(
+  //     (user) => {
+  //       // return dispatch(success(user?.data?.data));
+  //       dispatch(setUser(user?.data?.data));
+  //     },
+  //     (error) => {
+  //       if (error && error?.response?.data?.code === TOKEN_NOT_VALID) {
+  //         if (Router.asPath === "/signup") {
+  //           return;
+  //         } else {
+  //           return Router.push("/login");
+  //         }
+  //       }
+  //       return Router.push("/login");
+  //     },
+  //   );
 };
 
 // function userInfo(sessionObj) {
@@ -154,10 +169,10 @@ function logoutUser(sessionObj) {
   return (dispatch) => {
     if (
       sessionObj.sessionStatus === "authenticated" &&
-      sessionObj?.user?.email &&
+      sessionObj?.user?.accountNumber &&
       sessionObj?.accessToken
     ) {
-      dispatch(request(sessionObj?.user?.email));
+      dispatch(request(sessionObj?.user?.accountNumber));
       const userInfoAPI = `/logout`;
       const accessToken = sessionObj?.accessToken;
       getAPI(userInfoAPI, accessToken).then(

@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "../../styles/Auth.module.scss";
 import Link from "next/link";
 type FormInputs = {
-  email: string;
+  accountNumber: string;
   password: string;
 };
 const Login = () => {
@@ -36,14 +36,14 @@ const Login = () => {
     });
   };
   const signInWithCredentials = async (data: any) => {
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
-      return setError("email", {
-        type: "onSubmit",
-        message: "Email Address must be valid",
-      });
-    }
+    // if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.accountNumber)) {
+    //   return setError("accountNumber", {
+    //     type: "onSubmit",
+    //     message: "Account Number must be valid",
+    //   });
+    // }
     const signInSession = await signIn("credentials", {
-      email: data.email,
+      accountNumber: data.accountNumber,
       password: data.password,
       redirect: true,
       callbackUrl: `${process.env.NEXT_PUBLIC_CALLBACK_URL}dashboard`,
@@ -62,7 +62,7 @@ const Login = () => {
         });
       } else {
         router.push("/login");
-        return setError("email", {
+        return setError("accountNumber", {
           type: "onsubmit",
           message: error,
         });
@@ -98,22 +98,26 @@ const Login = () => {
             <div className={styles.inputFieldsContainer}>
               <div className={styles.inputContainer}>
                 <Label
-                  htmlFor="email"
-                  className={`${errors?.email && styles.invalid}`}
+                  htmlFor="accountNumber"
+                  className={`${errors?.accountNumber && styles.invalid}`}
                 >
-                  Email ID <sup>*</sup>
+                  Account Number ID <sup>*</sup>
                 </Label>
                 <input
-                  type="text"
-                  id="email"
-                  className={`${errors?.email && styles.invalid}`}
-                  {...register("email", {
-                    required: "Email Address Required",
+                  type="number"
+                  id="accountNumber"
+                  min={0}
+                  max={99999999}
+                  className={`${errors?.accountNumber && styles.invalid}`}
+                  {...register("accountNumber", {
+                    required: "Account Number is Required",
                   })}
                 />
               </div>
-              {errors?.email && (
-                <p className={styles.errorLabel}>{errors?.email.message}</p>
+              {errors?.accountNumber && (
+                <p className={styles.errorLabel}>
+                  {errors?.accountNumber.message}
+                </p>
               )}
             </div>
             <div className={styles.inputFieldsContainer}>
