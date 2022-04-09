@@ -5,6 +5,7 @@
     "dependencies": {
         "axios": "^0.26.1",
         "classnames": "^2.2.6",
+        "e-wallet": "file:..",
         "jwt-decode": "^3.1.2",
         "mern-auth": "file:..",
         "react": "^18.0.0",
