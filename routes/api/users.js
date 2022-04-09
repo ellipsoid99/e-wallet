@@ -38,11 +38,11 @@ router.post("/register",async  (req, res) => {
 
     var result=req.body;
     var accNum = await AccountNumber.find();
-    console.log(">>>",accNum)
-    console.log(">>>>>>>>>>>>>>>>",accNum.accountNumber);
-    console.log(">>>>>>>>>>>>>>>>",typeof accNum.accountNumber);
+    console.log(">>>",accNum[0])
+    console.log(">>>>>>>>>>>>>>>>",accNum[0].accountNumber);
+    console.log(">>>>>>>>>>>>>>>>",typeof accNum[0].accountNumber);
 
-    var val = accNum.accountNumber + 1;
+    var val = accNum[0].accountNumber + 1;
     console.log(">>>>",val);
     AccountNumber.findOneAndUpdate(
       { index: "1" },
