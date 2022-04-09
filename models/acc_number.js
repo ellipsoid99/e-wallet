@@ -6,7 +6,7 @@ const AccountNumberSchema = new Schema ({
         type:String
     },
     accountNumber:{
-        type:String
+        type:Number
     },
 })
 

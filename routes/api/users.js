@@ -10,14 +10,13 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
 // Load User model
-const User = require("../../models/User1");
+const User = require("../../models/user.model");
 const AccountNumber = require("../../models/acc_number");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
-router.post("/register", (req, res) => {
+router.post("/register",async  (req, res) => {
   // Form validation
-
   console.log(req.body);
   const { errors, isValid } = validateRegisterInput(req.body);
   
@@ -36,13 +35,15 @@ router.post("/register", (req, res) => {
   //       password: req.body.password
   //     });
 
-    var result=req.body;
-    var accNum = AccountNumber.findOne({ index: "1" });
-    console.log(accNum.accountNumber);
-    console.log(typeof accNum.accountNumber);
 
-    var val = parseInt(accNum.accountNumber) + 1;
-    console.log(val);
+    var result=req.body;
+    var accNum = await AccountNumber.find();
+    console.log(">>>",accNum)
+    console.log(">>>>>>>>>>>>>>>>",accNum.accountNumber);
+    console.log(">>>>>>>>>>>>>>>>",typeof accNum.accountNumber);
+
+    var val = accNum.accountNumber + 1;
+    console.log(">>>>",val);
     AccountNumber.findOneAndUpdate(
       { index: "1" },
       { $set: { accountNumber: val } },
@@ -73,8 +74,11 @@ router.post("/register", (req, res) => {
             .catch(err => console.log(err));
         });
       });
-    }),
+    
+}),
 
+
+  
 
 // @route POST api/users/login
 // @desc Login user and return JWT token
