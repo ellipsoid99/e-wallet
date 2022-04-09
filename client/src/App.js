@@ -6,12 +6,14 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
-import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
-import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./components/dashboard/Dashboard";
+import Navbar from "components/layout/Navbar";
+import Landing from "components/layout/Landing";
+import Register from "pages/auth/Register";
+import Login from "pages/auth/Login";
+import PrivateRoute from "components/private-route/PrivateRoute";
+import Dashboard from "pages/dashboard/Dashboard";
+import Payments from "pages/payments/Payments";
+import "./App.scss";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -47,6 +49,11 @@ class App extends Component {
                                 exact
                                 path="/dashboard"
                                 component={Dashboard}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/payments"
+                                component={Payments}
                             />
                         </Switch>
                     </div>

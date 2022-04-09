@@ -1,0 +1,51 @@
+nav {
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+    .link-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+    }
+    .button-wrapper {
+        right: 0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        button {
+            margin: 1em;
+            border-radius: 10px;
+            background-color: transparent;
+            color: black;
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+.nav-menu-item {
+    display: flex;
+    padding: 1em;
+    margin: 1em;
+    width: 100%;
+}
+.first-link .bankable {
+    display: flex;
+    color: black;
+    i {
+        margin-right: 5px;
+        transform: translateY(5px);
+    }
+}
+.first-link a {
+    font-size: 30px;
+}
+.nav-text {
+    text-transform: uppercase !important;
+    a {
+        color: black;
+        font-size: 20px;
+    }
+}
