@@ -134,6 +134,7 @@ router.post("/login", (req, res) => {
           },
           (err, token) => {
             res.json({
+              accountnumber:accountnumber,
               success: true,
               token: "Bearer " + token
             });
