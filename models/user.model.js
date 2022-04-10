@@ -26,10 +26,39 @@ const UserSchema = new Schema ({
         required:false,
         default:0
     },
-    transactions:[
-        {type:Schema.Types.ObjectId,ref:'Transactions'}
-    ]
-    
+    transaction:
+        {
+        balance:{
+            type:Number,
+            required:false,
+            default:0,
+            
+        },
+        transactions:
+            [
+                {to:{
+                    type:Number,
+                    required:true,
+                },
+                from:{
+                    type:Number,
+                    required:true
+                },
+                date:{
+                    type:Date,
+                    required:true,
+                },
+                flag:{
+                    type:Boolean,
+                    required:true,
+                },
+                amount:{
+                    type:Number,
+                    required:true,
+                }
+            }
+         ]
+        }
 })
 
 // UserSchema.pre('save',async function(next){

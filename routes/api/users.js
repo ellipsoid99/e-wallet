@@ -55,15 +55,16 @@ router.post("/register",async  (req, res) => {
       },
     );
 
-    const transactionUser = new Transaction({
-      accountNumber : val,
-      balance : 0,
-      transcations:[{}]
-    });
-    console.log(">>>>$$$",transactionUser)
+    // const transactionUser = new Transaction({
+    //   accountNumber : val,
+    //   balance : 0,
+    //   transcations:[{}]
+    // });
+    // console.log(">>>>$$$",transactionUser)
 
     result.accountnumber = val;
-    result.transactions=transactionUser;
+    // result.transaction.balance=0;
+    // result.transaction.transactions=[]
 
     const user = new User(result);
     
