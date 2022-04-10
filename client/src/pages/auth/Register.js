@@ -10,8 +10,9 @@ class Register extends Component {
     constructor() {
         super();
         this.state = {
-            name: "",
-            email: "",
+            firstname: "",
+            lastname: "",
+            phoneNumber: "",
             password: "",
             password2: "",
             errors: {},
@@ -41,8 +42,9 @@ class Register extends Component {
         e.preventDefault();
 
         const newUser = {
-            name: this.state.name,
-            email: this.state.email,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            phoneNumber: this.state.phoneNumber,
             password: this.state.password,
             password2: this.state.password2,
         };
@@ -79,29 +81,45 @@ class Register extends Component {
                             <div className="input-field col s12">
                                 <input
                                     onChange={this.onChange}
-                                    value={this.state.name}
-                                    error={errors.name}
-                                    id="name"
+                                    value={this.state.firstname}
+                                    error={errors.firstname}
+                                    id="firstname"
                                     type="text"
                                     className={classnames("", {
-                                        invalid: errors.name,
+                                        invalid: errors.firstname,
                                     })}
                                 />
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="firstname">First Name</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12">
                                 <input
                                     onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email}
-                                    id="email"
-                                    type="email"
+                                    value={this.state.lastname}
+                                    error={errors.lastname}
+                                    id="lastname"
+                                    type="text"
                                     className={classnames("", {
-                                        invalid: errors.email,
+                                        invalid: errors.lastname,
                                     })}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="lastname">Last Name</label>
+                                <span className="red-text">{errors.name}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <input
+                                    onChange={this.onChange}
+                                    value={this.state.phoneNumber}
+                                    error={errors.phoneNumber}
+                                    id="phoneNumber"
+                                    type="text"
+                                    className={classnames("", {
+                                        invalid: errors.phoneNumber,
+                                    })}
+                                />
+                                <label htmlFor="phoneNumber">
+                                    Phone Number
+                                </label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="input-field col s12">
@@ -174,7 +192,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors,
 });
 
-export default connect(
-    mapStateToProps,
-    { registerUser }
-)(withRouter(Register));
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

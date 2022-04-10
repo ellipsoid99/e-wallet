@@ -10,7 +10,7 @@ class Login extends Component {
     constructor() {
         super();
         this.state = {
-            email: "",
+            accountnumber: "",
             password: "",
             errors: {},
         };
@@ -43,7 +43,7 @@ class Login extends Component {
         e.preventDefault();
 
         const userData = {
-            email: this.state.email,
+            accountnumber: this.state.accountnumber,
             password: this.state.password,
         };
 
@@ -79,20 +79,20 @@ class Login extends Component {
                             <div className="input-field col s12">
                                 <input
                                     onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email}
-                                    id="email"
-                                    type="email"
+                                    value={this.state.accountnumber}
+                                    error={errors.accountnumber}
+                                    id="accountnumber"
+                                    type="text"
                                     className={classnames("", {
                                         invalid:
-                                            errors.email ||
-                                            errors.emailnotfound,
+                                            errors.accountnumber ||
+                                            errors.accountnumbernotfound,
                                     })}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">Account Number</label>
                                 <span className="red-text">
-                                    {errors.email}
-                                    {errors.emailnotfound}
+                                    {errors.accountnumber}
+                                    {errors.accountnumbernotfound}
                                 </span>
                             </div>
                             <div className="input-field col s12">
@@ -150,7 +150,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors,
 });
 
-export default connect(
-    mapStateToProps,
-    { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);
