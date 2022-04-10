@@ -12,6 +12,7 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/user.model");
 const AccountNumber = require("../../models/acc_number");
+const Transaction = require("../../models/transcations")
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -38,9 +39,9 @@ router.post("/register",async  (req, res) => {
 
     var result=req.body;
     var accNum = await AccountNumber.find();
-    console.log(">>>",accNum[0])
-    console.log(">>>>>>>>>>>>>>>>",accNum[0].accountNumber);
-    console.log(">>>>>>>>>>>>>>>>",typeof accNum[0].accountNumber);
+    // console.log(">>>",accNum[0])
+    // console.log(">>>>>>>>>>>>>>>>",accNum[0].accountNumber);
+    // console.log(">>>>>>>>>>>>>>>>",typeof accNum[0].accountNumber);
 
     var val = accNum[0].accountNumber + 1;
     console.log(">>>>",val);
@@ -54,8 +55,18 @@ router.post("/register",async  (req, res) => {
       },
     );
 
+    const transactionUser = new Transaction({
+      accountNumber : val,
+      balance : 0,
+      transcations:[{}]
+    });
+    console.log(">>>>$$$",transactionUser)
+
     result.accountnumber = val;
+    result.transactions=transactionUser;
+
     const user = new User(result);
+    
     // const newUser = new User({
     //         name: req.body.name,
     //         email: req.body.email,
@@ -135,4 +146,23 @@ router.post("/login", (req, res) => {
     });
   });
 });
+//get user details
+
+router.get('/:accountnumber', (req, res) => {
+  
+  let data={};
+  const accNo = req.params.accountnumber;
+  console.log(accNo)
+
+  User.find({accountnumber:accNo}).then(result=>{
+    
+    res.status(200).json({data:result})
+  })
+  .catch(err=>{
+    console.log(err);
+    res.status(500).json({
+      error:err
+    })
+  })
+})
 module.exports = router;

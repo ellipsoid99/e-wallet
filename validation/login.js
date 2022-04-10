@@ -11,7 +11,7 @@ module.exports = function validateLoginInput(data) {
   // Email checks
   if (Validator.isEmpty(data.accountnumber)) {
     errors.accountnumber = "AccountNumber field is required";
-  } else if (!Validator.isEmail(data.accountnumber)) {
+  } else if (!Validator.isNumeric(data.accountnumber)) {
     errors.accountnumber = "AccountNumber is invalid";
   }
   // Password checks

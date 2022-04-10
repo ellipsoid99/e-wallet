@@ -1,14 +1,42 @@
-const { boolean } = require('@hapi/joi')
 const mongoose=require('mongoose')
 const Schema=mongoose.Schema
-const UserSchema = new Schema ({
-    amount:{
+const TransactionSchema = new Schema ({
+    accountNumber:{
         type:Number,
         required:true,
-        default:0
     },
-    flag:{
-        type:boolean,
+    balance:{
+        type:Number,
         required:true,
+        
     },
-})
+    transactions:
+        [
+            {to:{
+                type:Number,
+                required:true,
+            },
+            from:{
+                type:Number,
+                required:true
+            },
+            date:{
+                type:Date,
+                required:true,
+            },
+            flag:{
+                type:Boolean,
+                required:true,
+            },
+            amount:{
+                type:Number,
+                required:true,
+            }
+        }
+     ]
+    
+    
+});
+
+const Transactions = mongoose.model('transaction',TransactionSchema )
+module.exports=Transactions

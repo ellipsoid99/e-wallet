@@ -1,6 +1,7 @@
 const mongoose=require('mongoose')
 const Schema=mongoose.Schema
 const bcrypt=require('bcryptjs')
+const Transactions=require('./transcations')
 
 const UserSchema = new Schema ({
     accountnumber:{
@@ -25,11 +26,10 @@ const UserSchema = new Schema ({
         required:false,
         default:0
     },
-    balance:{
-        type:Number,
-        required:false,
-        default:0.0
-    },
+    transactions:[
+        {type:Schema.Types.ObjectId,ref:'Transactions'}
+    ]
+    
 })
 
 // UserSchema.pre('save',async function(next){
