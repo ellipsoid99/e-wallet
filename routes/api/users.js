@@ -293,32 +293,44 @@ router.post('/payments', (req, res) => {
 // }
 // router.get('/securepayment',(req,res)=>{
 
-//     var session=false;
-//     var accNo=req.body.accountnumber;
-//     User.find({accNo}).then(result=>{
+//     const accNo=req.body.accountnumber;
+//     User.findOne({accountnumber:accNo}).then(user=>{
     
-//       if(result.paymentSession==true)
+//       if(user.paymentSession===true)
 //       {
-//         res.status(200).json({"session not available"})
+//         res.status(201).json({})
 //       }
 //       else
 //       {
-//         result.paymentSession=true
-//         res.status(201).json({"session available"})
-//         let timeout = setTimeout(expires,50000000)
+        // user.paymentSession=true
+      //   User.findOneAndUpdate(
+      //     {
+      //       accountnumber:accNo
+      //     },
+      //     {
+      //       $set:{
+      //         paymentSession:true
+      //       },
+      //     },
+      //     (err,doc) =>{
+      //       if(err)console.log("error updating user db",err)
+      //       console.log(doc)
+      //     }
+      //     )
+          
+      //   // res.status(201).json({"session available"})
+      //   // let timeout = setTimeout(expires,50000000)
 
-//       }
-      
-//     })
+      // }
+      // res.status(200).json({data:user})
+//     }
+//   })
 //     .catch(err=>{
 //       console.log(err);
 //       res.status(500).json({
 //         error:err
 //       })
-//     })
-
-
-
-// })
+//     });
+// });
 
 module.exports = router;
