@@ -58,7 +58,11 @@ const UserSchema = new Schema ({
                 }
             }
          ]
-        }
+        },
+        // paymentSession:{
+        //     type:Boolean,
+        //     required:false,
+        // }
 })
 
 // UserSchema.pre('save',async function(next){

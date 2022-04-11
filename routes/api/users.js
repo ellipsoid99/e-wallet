@@ -167,4 +167,173 @@ router.get('/:accountnumber', (req, res) => {
     })
   })
 })
+
+
+router.post('/payments', (req, res) => {
+
+  const senderaccNo = req.body.senderAccountNumber;
+  const receiveraccNo = req.body.receiverAccountNumber;
+  const amt = req.body.amount;
+  //const date = req.body.date;
+
+    User.findOne({accountnumber:senderaccNo}).then(sender=>{
+    
+    if(amt>sender.transaction.balance)
+    {
+      res.status(500).json({
+        error:"Insufficient balance"
+      })
+    }
+    else
+    {
+      //sender
+      sender.transaction.balance = (sender.transaction.balance - amt);
+        const newtransactions ={
+        to:receiveraccNo,
+        from:senderaccNo,
+        date:new Date(),
+        flag:false,
+        amount:amt,
+      }
+      console.log("SENDER",newtransactions)
+      sender.transaction.transactions.push(newtransactions)
+      console.log("ARRAY SENDER TRANSACTIONS",sender.transaction.transactions)
+      console.log(sender)
+
+
+      //UPDATE sender db
+
+        User.findOneAndUpdate(
+        {
+          "accountnumber":senderaccNo
+        },
+        {
+          $set:{
+            transaction:{
+              balance:sender.transaction.balance
+                       
+            }
+          },
+        },
+        {
+          $push:{
+            
+              transaction:{
+                transactions:sender.transaction.transactions
+              },
+          },
+        },
+        (err,doc) =>{
+          if(err)console.log("error updating user db",err)
+          console.log(doc)
+        }
+        )
+      
+      //receiver
+      User.findOne({accountnumber:receiveraccNo}).then(receiver=>{
+    
+      
+        receiver.transaction.balance = +receiver.transaction.balance+ +amt;
+        const newtransactions ={
+        to:receiveraccNo,
+        fromt:senderaccNo,
+        date:new Date(),
+        flag:true,
+        amount:amt
+        
+      }
+      
+      console.log("RECEIVER",newtransactions)
+      receiver.transaction.transactions.push(newtransactions)
+      console.log("ARRAY RECEIVER TRANSACTIONS",receiver.transaction.transactions)
+      console.log(receiver)
+      
+      console.log(typeof (receiver.transaction.transactions))
+      //UPDATE receiver db
+      
+      User.findOneAndUpdate(
+        {
+          "accountnumber":receiveraccNo
+        },
+        {
+          $set:{
+            transaction:{
+              balance:receiver.transaction.balance
+                       
+            }
+          },
+        },
+        {
+          $push:{
+            
+              transaction:{
+                transactions:receiver.transaction.transactions
+              },
+          },
+        },
+        (err,doc) =>{
+          if(err)console.log("error updating user db",err)
+          // console.log(doc)
+        }
+      );
+      res.status(200).json({data:{sender,receiver}})
+        
+      })
+      .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+          error:err
+        })
+      })
+    }
+  })
+  .catch(err=>{
+    console.log(err);
+    res.status(500).json({
+      error:err
+    })
+  })
+})
+// function expires(accNo){
+//   User.find({accNo}).then(result=>{
+
+//     result.paymentSession=false;
+//   })
+//   .catch(err=>{
+//     console.log(err);
+//     res.status(500).json({
+//       error:err
+//     })    
+//   }
+// }
+// router.get('/securepayment',(req,res)=>{
+
+//     var session=false;
+//     var accNo=req.body.accountnumber;
+//     User.find({accNo}).then(result=>{
+    
+//       if(result.paymentSession==true)
+//       {
+//         res.status(200).json({"session not available"})
+//       }
+//       else
+//       {
+//         result.paymentSession=true
+//         res.status(201).json({"session available"})
+//         let timeout = setTimeout(expires,50000000)
+
+//       }
+      
+//     })
+//     .catch(err=>{
+//       console.log(err);
+//       res.status(500).json({
+//         error:err
+//       })
+//     })
+
+
+
+// })
+
 module.exports = router;
