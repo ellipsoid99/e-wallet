@@ -210,17 +210,9 @@ router.post('/payments', (req, res) => {
         {
           $set:{
             transaction:{
-              balance:sender.transaction.balance
-                       
-            }
-          },
-        },
-        {
-          $push:{
-            
-              transaction:{
-                transactions:sender.transaction.transactions
-              },
+              balance:sender.transaction.balance,
+              transactions:sender.transaction.transactions         
+            },
           },
         },
         (err,doc) =>{
@@ -258,17 +250,10 @@ router.post('/payments', (req, res) => {
         {
           $set:{
             transaction:{
-              balance:receiver.transaction.balance
+              balance:receiver.transaction.balance,
+              transactions:receiver.transaction.transactions
                        
             }
-          },
-        },
-        {
-          $push:{
-            
-              transaction:{
-                transactions:receiver.transaction.transactions
-              },
           },
         },
         (err,doc) =>{

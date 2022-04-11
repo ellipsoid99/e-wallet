@@ -36,27 +36,27 @@ const UserSchema = new Schema ({
         },
         transactions:
             [
-                {to:{
-                    type:Number,
-                    required:true,
-                },
-                from:{
-                    type:Number,
-                    required:true
-                },
-                date:{
-                    type:Date,
-                    required:true,
-                },
-                flag:{
-                    type:Boolean,
-                    required:true,
-                },
-                amount:{
-                    type:Number,
-                    required:true,
-                }
-            }
+            //     {to:{
+            //         type:Number,
+            //         required:true,
+            //     },
+            //     from:{
+            //         type:Number,
+            //         required:true
+            //     },
+            //     date:{
+            //         type:Date,
+            //         required:true,
+            //     },
+            //     flag:{
+            //         type:Boolean,
+            //         required:true,
+            //     },
+            //     amount:{
+            //         type:Number,
+            //         required:true,
+            //     }
+            // }
          ]
         },
         // paymentSession:{
