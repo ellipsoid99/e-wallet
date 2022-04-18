@@ -62,7 +62,7 @@ const data = [
         timestamp: "time3",
     },
 ];
-const PaymentOverview = () => {
+const PaymentOverview = (props) => {
     return (
         <div className="outerWrapper">
             <div className="headerWrapper">PAYMENT SUMMARY</div>
