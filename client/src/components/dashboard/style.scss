@@ -33,6 +33,13 @@
         }
         .textWrapper {
             height: 50%;
+            h3 {
+                margin: 1px;
+                text-transform: uppercase;
+            }
+            h4 {
+                opacity: 60%;
+            }
         }
 
         .userInfo {

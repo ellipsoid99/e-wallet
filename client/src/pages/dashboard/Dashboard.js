@@ -6,9 +6,10 @@ import DashboardComponent from "components/dashboard";
 class Dashboard extends Component {
     render() {
         const { user } = this.props.auth;
+        const accountnumber = localStorage.getItem("accountnumber");
         return (
             <div className="container valign-wrapper">
-                <DashboardComponent user={user} />
+                <DashboardComponent user={user} accountnumber={accountnumber} />
             </div>
         );
     }

@@ -36,9 +36,11 @@ const AccountOverview = (props) => {
                         <img src="https://via.placeholder.com/100" />
                     </div>
                     <div className="textWrapper">
-                        <h3 className="userInfo">
-                            {props.data.firstname} + {props.data.lastname}
+                        <h5>Welcome</h5>
+                        <h3>
+                            {props.data[0].firstname} {props.data[0].lastname}
                         </h3>
+                        <h4>{props.data[0].accountnumber} </h4>
                         <p className="message">Hope you're doing well!!</p>
                     </div>
                 </div>
