@@ -1,0 +1,53 @@
+.navMenu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-height: 60px;
+    background: linear-gradient(
+        90deg,
+        rgba(250, 229, 150, 1) 30%,
+        rgba(63, 176, 172, 1) 80%,
+        rgba(23, 62, 67, 1) 100%
+    );
+    .linkWrapper {
+        width: 100%;
+        .navMenuItems {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            .firstLink {
+                display: flex;
+                img {
+                    max-width: 120px;
+                    max-height: 120px;
+                    margin: -4px -24px;
+                    margin-left: -45px;
+                }
+            }
+            li {
+                font-size: 20px;
+                margin-right: 12px;
+                a {
+                    color: rgba(23, 62, 67, 1);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    .buttonWrapper {
+        right: 0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        button {
+            margin: 1em;
+            border-radius: 10px;
+            background-color: transparent;
+            color: rgba(250, 229, 150, 1);
+            border: 1px solid rgba(250, 229, 150, 1);
+            box-shadow: none;
+        }
+    }
+}

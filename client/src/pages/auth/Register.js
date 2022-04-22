@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Container, Col, Row } from "react-bootstrap";
 import { registerUser } from "../../actions/authActions";
-import classnames from "classnames";
-import "./auth.scss";
+import Welcome from "components/welcome/Welcome";
+import styles from "./Auth.module.scss";
 
 class Register extends Component {
     constructor() {
@@ -54,129 +55,118 @@ class Register extends Component {
 
     render() {
         const { errors } = this.state;
-
         return (
-            <div className="container">
-                <div className="row">
-                    <div className=" col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="white-text material-icons left">
-                                keyboard_backspace
-                            </i>{" "}
-                            <span className="white-text">Back to home</span>
-                        </Link>
-                        <div
-                            className="white-text col s12"
-                            style={{ paddingLeft: "11.250px" }}
-                        >
-                            <h4>
-                                <b>Register</b> below
-                            </h4>
-                            <p className="white-text text-darken-1">
-                                Already have an account?{" "}
-                                <Link to="/login">Log in</Link>
-                            </p>
-                        </div>
-                        <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.firstname}
-                                    error={errors.firstname}
-                                    id="firstname"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.firstname,
-                                    })}
-                                />
-                                <label htmlFor="firstname">First Name</label>
-                                <span className="red-text">{errors.name}</span>
+            <Container fluid className={styles.base}>
+                <Row className={styles.container}>
+                    <Col md={7}>
+                        <Welcome />
+                    </Col>
+                    <Col md={5}>
+                        <div className={styles.formContainer}>
+                            <div className={styles.header}>
+                                <h4>
+                                    <b>Register</b> below
+                                </h4>
+                                <p>
+                                    Already have an account?{" "}
+                                    <Link to="/login" className={styles.link}>
+                                        Log in
+                                    </Link>
+                                </p>
                             </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.lastname}
-                                    error={errors.lastname}
-                                    id="lastname"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.lastname,
-                                    })}
-                                />
-                                <label htmlFor="lastname">Last Name</label>
-                                <span className="red-text">{errors.name}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.phoneNumber}
-                                    error={errors.phoneNumber}
-                                    id="phoneNumber"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.phoneNumber,
-                                    })}
-                                />
-                                <label htmlFor="phoneNumber">
-                                    Phone Number
-                                </label>
-                                <span className="red-text">{errors.email}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password}
-                                    id="password"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password,
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
-                                <span className="red-text">
-                                    {errors.password}
-                                </span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password2}
-                                    error={errors.password2}
-                                    id="password2"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password2,
-                                    })}
-                                />
-                                <label htmlFor="password2">
-                                    Confirm Password
-                                </label>
-                                <span className="red-text">
-                                    {errors.password2}
-                                </span>
-                            </div>
-                            <div
-                                className="col s12"
-                                style={{ paddingLeft: "11.250px" }}
+                            <form
+                                noValidate
+                                onSubmit={this.onSubmit}
+                                className={styles.form}
                             >
-                                <button
-                                    style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem",
-                                    }}
-                                    type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                                >
-                                    Sign up
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                                <div className={styles.inputGroup}>
+                                    <label htmlFor="firstname">
+                                        First Name
+                                    </label>
+                                    <input
+                                        onChange={this.onChange}
+                                        value={this.state.firstname}
+                                        error={errors.firstname}
+                                        id="firstname"
+                                        type="text"
+                                    />
+                                    <span className={styles.error}>
+                                        {errors.name}
+                                    </span>
+                                </div>
+                                <div className={styles.inputGroup}>
+                                    <label htmlFor="lastname">Last Name</label>
+
+                                    <input
+                                        onChange={this.onChange}
+                                        value={this.state.lastname}
+                                        error={errors.lastname}
+                                        id="lastname"
+                                        type="text"
+                                    />
+                                    <span className={styles.error}>
+                                        {errors.name}
+                                    </span>
+                                </div>
+                                <div className={styles.inputGroup}>
+                                    <label htmlFor="phoneNumber">
+                                        Phone Number
+                                    </label>
+                                    <input
+                                        onChange={this.onChange}
+                                        value={this.state.phoneNumber}
+                                        error={errors.phoneNumber}
+                                        id="phoneNumber"
+                                        type="text"
+                                    />
+
+                                    <span className={styles.error}>
+                                        {errors.email}
+                                    </span>
+                                </div>
+                                <div className={styles.inputGroup}>
+                                    <label htmlFor="password">Password</label>
+
+                                    <input
+                                        onChange={this.onChange}
+                                        value={this.state.password}
+                                        error={errors.password}
+                                        id="password"
+                                        type="password"
+                                    />
+                                    <span className={styles.error}>
+                                        {errors.password}
+                                    </span>
+                                </div>
+                                <div className={styles.inputGroup}>
+                                    <label htmlFor="password2">
+                                        Confirm Password
+                                    </label>
+                                    <input
+                                        onChange={this.onChange}
+                                        value={this.state.password2}
+                                        error={errors.password2}
+                                        id="password2"
+                                        type="password"
+                                    />
+
+                                    <span className={styles.error}>
+                                        {errors.password2}
+                                    </span>
+                                </div>
+                                <div className={styles.buttonContainer}>
+                                    <button
+                                        type="submit"
+                                        className={styles.myButton}
+                                    >
+                                        Sign up
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

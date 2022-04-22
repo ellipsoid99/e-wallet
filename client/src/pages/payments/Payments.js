@@ -6,7 +6,6 @@ import PaymentsComponent from "components/payments";
 class Payments extends Component {
     render() {
         const { user } = this.props.auth;
-
         return <PaymentsComponent user={user} />;
     }
 }

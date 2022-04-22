@@ -1,50 +1,14 @@
-import React, { useState } from "react";
-import { Row, Col, Container } from "react-bootstrap";
 import PaymentProgress from "./PaymentProgress";
 import PaymentForm from "./PaymentForm";
-import "./style.scss";
+import styles from "./Payment.module.scss";
 
 const PaymentsComponent = () => {
-    const [formData, setFormData] = useState({
-        from: "",
-        to: "",
-        amount: "",
-        authKey: "",
-    });
-    const onSubmitHandler = (e) => {};
     return (
-        <div className="wrapper">
-            <div className="formContainer">
-                <form>
-                    <div className="header">
-                        <h3>PAYMENT FORM</h3>
-                    </div>
-                    <div className="formBody">
-                        <input
-                            type="text"
-                            name="Payment From"
-                            placeholder="Who is making the payment..."
-                            value={formData.from}
-                        />
-                        <input
-                            type="text"
-                            name="Payment To"
-                            placeholder="To Whom the payment is made..."
-                            value={formData.to}
-                        />{" "}
-                        <input
-                            type="number"
-                            name="Amount"
-                            placeholder="Amount to be sent..."
-                            value={formData.amount}
-                        />
-                        <div className="buttonWrapper">
-                            <button>Pay Now</button>
-                        </div>
-                    </div>
-                </form>
+        <div className={`${styles.wrapper} gradientBase`}>
+            <div className={styles.formContainer}>
+                <PaymentForm />
             </div>
-            <div className="otherContainer">
+            <div className={styles.otherContainer}>
                 <PaymentProgress />
             </div>
         </div>
