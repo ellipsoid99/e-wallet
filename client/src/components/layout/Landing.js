@@ -1,51 +1,32 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Link } from "react-router-dom";
+import { Container, Col, Row } from "react-bootstrap";
+import styles from "./Layout.module.scss";
+import Welcome from "components/welcome/Welcome";
 
 class Landing extends Component {
     render() {
         return (
-            <div
-                style={{ height: "75vh" }}
-                className="container valign-wrapper"
-            >
-                <div className="row">
-                    <div className="col s12 center-align">
+            <Container fluid className={styles.container}>
+                <Row className={styles.wrapper}>
+                    <Welcome />
+
+                    <Col>
                         <h4 className="white-text">
-                            <b>Welcome</b> to your banking app{" "}
-                            <span style={{ fontFamily: "monospace" }}>
-                                BANKABLE
-                            </span>{" "}
+                            <b>Welcome</b> to your banking app
+                            <span>BANKABLE</span>{" "}
                         </h4>
-                        <br />
-                        <div className="col s6">
-                            <Link
-                                to="/register"
-                                style={{
-                                    width: "140px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                }}
-                                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                            >
-                                Register
-                            </Link>
-                        </div>
-                        <div className="col s6">
-                            <Link
-                                to="/login"
-                                style={{
-                                    width: "140px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                }}
-                                className="btn btn-large btn-flat waves-effect white black-text"
-                            >
-                                Log In
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Link to="/register">Register</Link>
+                    </Col>
+                    <Col>
+                        <Link to="/login">Log In</Link>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
