@@ -84,3 +84,51 @@
         }
     }
 }
+
+.modal {
+    height: 100vh;
+    background: #c4b9b590;
+    background-image: url("http://localhost:3000/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    .modalContent {
+        overflow: hidden;
+        background: linear-gradient(
+                90deg,
+                rgba(250, 229, 150, 0.5) 30%,
+                rgba(63, 176, 172, 0.5) 80%,
+                rgba(23, 62, 67, 0.5) 100%
+            ),
+            url("http://localhost:3000/background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .modalHeader {
+        border: none;
+        border-bottom: 1px solid black;
+        .modalTitle {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+    }
+    .modalBody {
+        border: none;
+        h4 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 30px;
+            letter-spacing: 3px;
+        }
+    }
+    .modalFooter {
+        border: none;
+        .modalButton {
+            background: transparent;
+            border: 2px solid white;
+            &:hover {
+                background-color: rgba(23, 62, 67, 0.5);
+            }
+        }
+    }
+}

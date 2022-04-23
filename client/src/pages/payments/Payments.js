@@ -1,21 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import PaymentsComponent from "components/payments";
 
-class Payments extends Component {
-    render() {
-        const { user } = this.props.auth;
-        return <PaymentsComponent user={user} />;
-    }
-}
-
-Payments.propTypes = {
-    auth: PropTypes.object.isRequired,
+const Payments = () => {
+    const auth = useSelector((state) => state.auth);
+    return <PaymentsComponent user={auth.user} />;
 };
 
-const mapStateToProps = (state) => ({
-    auth: state.auth,
-});
-
-export default connect(mapStateToProps)(Payments);
+export default Payments;

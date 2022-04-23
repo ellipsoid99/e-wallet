@@ -1,62 +1,97 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Container, Col, Row } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Link, withRouter, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Container, Col, Row, Modal, Button } from "react-bootstrap";
 import { registerUser } from "../../actions/authActions";
 import Welcome from "components/welcome/Welcome";
 import styles from "./Auth.module.scss";
 
-class Register extends Component {
-    constructor() {
-        super();
-        this.state = {
-            firstname: "",
-            lastname: "",
-            phoneNumber: "",
-            password: "",
-            password2: "",
-            errors: {},
-        };
-    }
-
-    componentDidMount() {
-        // If logged in and user navigates to Register page, should redirect them to dashboard
-        if (this.props.auth.isAuthenticated) {
-            this.props.history.push("/dashboard");
+const Register = () => {
+    const history = useHistory();
+    const auth = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const [state, setState] = useState({
+        firstname: "",
+        lastname: "",
+        phoneNumber: "",
+        password: "",
+        password2: "",
+        errors: {},
+    });
+    const [modalShow, setModalShow] = useState(false);
+    const [accountnumber, setAccountnumber] = useState("");
+    const [success, setSuccess] = useState(false);
+    useEffect(() => {
+        if (auth.isAuthenticated) {
+            history.push("/dashboard");
         }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors,
-            });
-        }
-    }
-
-    onChange = (e) => {
-        this.setState({ [e.target.id]: e.target.value });
+    }, []);
+    useEffect(() => {
+        setModalShow(true);
+    }, [success]);
+    const onChange = (e) => {
+        setState({ ...state, [e.target.id]: e.target.value });
     };
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-
         const newUser = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            phoneNumber: this.state.phoneNumber,
-            password: this.state.password,
-            password2: this.state.password2,
+            firstname: state.firstname,
+            lastname: state.lastname,
+            phoneNumber: state.phoneNumber,
+            password: state.password,
+            password2: state.password2,
         };
-
-        this.props.registerUser(newUser, this.props.history);
+        dispatch(
+            registerUser(newUser, (result) => {
+                setAccountnumber(result);
+                setSuccess(true);
+            })
+        );
     };
-
-    render() {
-        const { errors } = this.state;
+    const MyModal = (props) => {
         return (
-            <Container fluid className={styles.base}>
+            <Modal
+                {...props}
+                size="lg"
+                centered
+                contentClassName={styles.modalContent}
+                className={styles.modal}
+            >
+                <Modal.Header className={styles.modalHeader}>
+                    <Modal.Title className={styles.modalTitle}>
+                        Registration Acknowledgement
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={styles.modalBody}>
+                    <h4>
+                        Please note your Account Number, you won't be able to
+                        retrive it later!!
+                    </h4>
+                    <p>{accountnumber}</p>
+                </Modal.Body>
+                <Modal.Footer className={styles.modalFooter}>
+                    <Button
+                        className={styles.modalButton}
+                        onClick={props.onHide}
+                    >
+                        Go To Login
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    };
+    return (
+        <Container fluid className={styles.base}>
+            {success ? (
+                <>
+                    {console.log("inside onsubmit", accountnumber)}
+                    <MyModal
+                        show={modalShow}
+                        onHide={() => history.push("/login")}
+                    />
+                </>
+            ) : (
                 <Row className={styles.container}>
                     <Col md={7}>
                         <Welcome />
@@ -76,7 +111,7 @@ class Register extends Component {
                             </div>
                             <form
                                 noValidate
-                                onSubmit={this.onSubmit}
+                                onSubmit={onSubmit}
                                 className={styles.form}
                             >
                                 <div className={styles.inputGroup}>
@@ -84,28 +119,28 @@ class Register extends Component {
                                         First Name
                                     </label>
                                     <input
-                                        onChange={this.onChange}
-                                        value={this.state.firstname}
-                                        error={errors.firstname}
+                                        onChange={onChange}
+                                        value={state.firstname}
+                                        error={state.errors.firstname}
                                         id="firstname"
                                         type="text"
                                     />
                                     <span className={styles.error}>
-                                        {errors.name}
+                                        {state.errors.name}
                                     </span>
                                 </div>
                                 <div className={styles.inputGroup}>
                                     <label htmlFor="lastname">Last Name</label>
 
                                     <input
-                                        onChange={this.onChange}
-                                        value={this.state.lastname}
-                                        error={errors.lastname}
+                                        onChange={onChange}
+                                        value={state.lastname}
+                                        error={state.errors.lastname}
                                         id="lastname"
                                         type="text"
                                     />
                                     <span className={styles.error}>
-                                        {errors.name}
+                                        {state.errors.name}
                                     </span>
                                 </div>
                                 <div className={styles.inputGroup}>
@@ -113,29 +148,29 @@ class Register extends Component {
                                         Phone Number
                                     </label>
                                     <input
-                                        onChange={this.onChange}
-                                        value={this.state.phoneNumber}
-                                        error={errors.phoneNumber}
+                                        onChange={onChange}
+                                        value={state.phoneNumber}
+                                        error={state.errors.phoneNumber}
                                         id="phoneNumber"
                                         type="text"
                                     />
 
                                     <span className={styles.error}>
-                                        {errors.email}
+                                        {state.errors.email}
                                     </span>
                                 </div>
                                 <div className={styles.inputGroup}>
                                     <label htmlFor="password">Password</label>
 
                                     <input
-                                        onChange={this.onChange}
-                                        value={this.state.password}
-                                        error={errors.password}
+                                        onChange={onChange}
+                                        value={state.password}
+                                        error={state.errors.password}
                                         id="password"
                                         type="password"
                                     />
                                     <span className={styles.error}>
-                                        {errors.password}
+                                        {state.errors.password}
                                     </span>
                                 </div>
                                 <div className={styles.inputGroup}>
@@ -143,15 +178,15 @@ class Register extends Component {
                                         Confirm Password
                                     </label>
                                     <input
-                                        onChange={this.onChange}
-                                        value={this.state.password2}
-                                        error={errors.password2}
+                                        onChange={onChange}
+                                        value={state.password2}
+                                        error={state.errors.password2}
                                         id="password2"
                                         type="password"
                                     />
 
                                     <span className={styles.error}>
-                                        {errors.password2}
+                                        {state.errors.password2}
                                     </span>
                                 </div>
                                 <div className={styles.buttonContainer}>
@@ -166,20 +201,9 @@ class Register extends Component {
                         </div>
                     </Col>
                 </Row>
-            </Container>
-        );
-    }
-}
-
-Register.propTypes = {
-    registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
+            )}
+        </Container>
+    );
 };
 
-const mapStateToProps = (state) => ({
-    auth: state.auth,
-    errors: state.errors,
-});
-
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default withRouter(Register);

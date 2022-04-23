@@ -28,6 +28,7 @@ const PaymentForm = () => {
             receiverAccountNumber: formData.to,
             amount: formData.amount,
         });
+        console.log("inside payments", reqBody);
         const getData = () => {
             axios
                 .post(`${url}payments`, reqBody)
@@ -55,11 +56,6 @@ const PaymentForm = () => {
                 autohide
             >
                 <Toast.Header className={styles.toastHeader}>
-                    <img
-                        src="holder.js/20x20?text=%20"
-                        className="rounded me-2"
-                        alt=""
-                    />
                     <strong className="me-auto">Acknowledgement</strong>
                 </Toast.Header>
                 <Toast.Body className={styles.toastBody}>{message}</Toast.Body>
