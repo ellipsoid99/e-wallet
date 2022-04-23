@@ -7,25 +7,16 @@ import Welcome from "components/welcome/Welcome";
 class Landing extends Component {
     render() {
         return (
-            <Container fluid className={styles.container}>
-                <Row className={styles.wrapper}>
-                    <Welcome />
-
-                    <Col>
-                        <h4 className="white-text">
-                            <b>Welcome</b> to your banking app
-                            <span>BANKABLE</span>{" "}
-                        </h4>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Link to="/register">Register</Link>
-                    </Col>
-                    <Col>
-                        <Link to="/login">Log In</Link>
-                    </Col>
-                </Row>
+            <Container fluid className="gradientBase">
+                <div className={styles.wrapper}>
+                    <div className={styles.gradientBase2}>
+                        <Welcome />
+                        <div className={styles.linksWrapper}>
+                            <Link to="/register">Register</Link>
+                            <Link to="/login">Log In</Link>
+                        </div>
+                    </div>
+                </div>
             </Container>
         );
     }

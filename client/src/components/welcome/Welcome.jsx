@@ -9,7 +9,7 @@ const Welcome = () => {
                 <div className={styles.welcomeText}>
                     <b>Welcome</b> to your banking app
                     <span>
-                        BANK
+                        BANK{""}
                         <span>ABLE</span>
                     </span>
                 </div>

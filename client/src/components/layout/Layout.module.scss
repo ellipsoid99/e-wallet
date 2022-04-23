@@ -51,3 +51,74 @@
         }
     }
 }
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    .gradientBase2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        outline: 2px solid black;
+        outline-offset: -60px;
+        width: 80vw;
+        height: 80vh;
+        overflow: hidden;
+        background: linear-gradient(
+                90deg,
+                rgba(250, 229, 150, 0.5) 30%,
+                rgba(63, 176, 172, 0.5) 80%,
+                rgba(23, 62, 67, 0.5) 100%
+            ),
+            url("http://localhost:3000/background.png"); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .linksWrapper {
+        display: flex;
+        width: 70vw;
+        justify-content: space-around;
+        align-items: center;
+    }
+    a {
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 400;
+        background-image: linear-gradient(
+            90deg,
+            rgba(63, 176, 172, 1) 20%,
+            rgba(23, 62, 67, 1) 80%
+        );
+        background-size: 200% 100%;
+        background-position: -100%;
+        position: relative;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all 0.3s ease-in-out;
+    }
+
+    a:before {
+        content: "";
+        background: rgba(23, 62, 67, 1);
+        display: block;
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    a:hover {
+        background-position: 0;
+    }
+
+    a:hover::before {
+        width: 100%;
+    }
+}
