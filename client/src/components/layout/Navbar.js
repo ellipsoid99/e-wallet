@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { SidebarData } from "./SidebarData";
-import "./style.scss";
+import styles from "./Layout.module.scss";
 
 const Navbar = (props) => {
     const onLogoutClick = (e) => {
@@ -14,21 +13,20 @@ const Navbar = (props) => {
 
     return (
         <>
-            <nav className="nav-menu">
-                <div className="link-wrapper">
-                    <ul className="nav-menu-items">
-                        <li className="first-link">
+            <nav className={styles.navMenu}>
+                <div className={styles.linkWrapper}>
+                    <ul className={styles.navMenuItems}>
+                        <li className={styles.firstLink}>
                             <Link to="/">
-                                <span className="bankable">
-                                    {" "}
-                                    <i className="material-icons">code</i>
-                                    BANKABLE
-                                </span>
+                                <img
+                                    src="http://localhost:3000/logo.png"
+                                    alt="logo"
+                                />
                             </Link>
                         </li>
                         {SidebarData.map((item, index) => {
                             return (
-                                <li key={index} className="nav-text">
+                                <li key={index}>
                                     <Link to={item.path}>
                                         <span>{item.title}</span>
                                     </Link>
@@ -38,7 +36,7 @@ const Navbar = (props) => {
                     </ul>
                 </div>
 
-                <div className="button-wrapper">
+                <div className={styles.buttonWrapper}>
                     <button
                         onClick={(e) => onLogoutClick(e)}
                         className="btn btn-large"

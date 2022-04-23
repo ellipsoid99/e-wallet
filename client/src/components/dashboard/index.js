@@ -1,52 +1,49 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import AccountOverview from "./account-overview";
 import FinanceOverview from "./finance-overview";
 import PaymentOverview from "./payment-overview";
-import "./style.scss";
+import styles from "./Dashboard.module.scss";
 
 const DashboardComponent = (props) => {
     const [accountData, setAccountData] = useState();
     const [isDataAvailable, setIsDataAvailable] = useState(false);
-    const url = "/api/users/";
-    const { user, accountnumber } = props;
-
-    const getData = () => {
-        axios
-            .get(`${url}${accountnumber}`)
-            .then((res) => {
-                const accData = res.data.data;
-                setAccountData(accData);
-                setIsDataAvailable(true);
-            })
-            .catch((error) => console.error(`Errors: ${error}`));
-    };
 
     useEffect(() => {
+        const { accountnumber } = props;
+        const url = "/api/users/";
+        const getData = () => {
+            axios
+                .get(`${url}${accountnumber}`)
+                .then((res) => {
+                    const accData = res.data.data[0];
+                    setAccountData(accData);
+                    setIsDataAvailable(true);
+                })
+                .catch((error) => console.error(`Errors: ${error}`));
+        };
         getData();
-    }, []);
+    }, [props]);
 
     return (
-        <Container fluid className="layout">
+        <Container fluid className="base">
             {isDataAvailable ? (
                 <>
-                    <Row>
-                        <Col md={4}>
+                    <div className={styles.row}>
+                        <div className={styles.column1}>
                             <AccountOverview data={accountData} />
-                        </Col>
-                        <Col md={8}>
-                            <FinanceOverview data={accountData} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <PaymentOverview data={accountData} />
-                        </Col>
-                    </Row>
+                        </div>
+                        <div className={styles.column2}>
+                            <FinanceOverview data={accountData.transaction} />
+                        </div>
+                    </div>
+                    <div className={styles.tableRow}>
+                        <PaymentOverview data={accountData.transaction} />
+                    </div>
                 </>
             ) : (
-                <></>
+                <>LOADING...</>
             )}
         </Container>
     );

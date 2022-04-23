@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import DashboardComponent from "components/dashboard";
@@ -8,7 +8,7 @@ class Dashboard extends Component {
         const { user } = this.props.auth;
         const accountnumber = localStorage.getItem("accountnumber");
         return (
-            <div className="container valign-wrapper">
+            <div className="base">
                 <DashboardComponent user={user} accountnumber={accountnumber} />
             </div>
         );
@@ -16,7 +16,6 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
 };
 
