@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import styles from "./Layout.module.scss";
 import Welcome from "components/welcome/Welcome";
 

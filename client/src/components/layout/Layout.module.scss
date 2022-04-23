@@ -15,23 +15,52 @@
             display: flex;
             align-items: center;
             list-style: none;
+            li {
+                font-size: 25px;
+                margin-right: 24px;
+                a {
+                    position: relative;
+                    display: block;
+                    overflow: hidden;
+                    color: rgba(23, 62, 67, 1);
+                    text-decoration: none;
+                    span {
+                        transition: transform 0.2s ease-out;
+                    }
+                    span:first-child {
+                        display: inline-block;
+                        padding: 8px 20px;
+                    }
+                    span:last-child {
+                        font-size: 16px;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transform: translateY(-100%);
+                    }
+                }
+            }
             .firstLink {
                 display: flex;
                 img {
                     max-width: 120px;
                     max-height: 120px;
-                    margin: -4px -24px;
-                    margin-left: -45px;
+                    margin: -40px -24px;
+                    margin-left: -30px;
                 }
             }
-            li {
-                font-size: 20px;
-                margin-right: 12px;
-                a {
-                    color: rgba(23, 62, 67, 1);
-                    text-decoration: none;
-                }
-            }
+        }
+        .navMenuItems a:hover span:first-child {
+            transform: translateY(100%);
+        }
+        .navMenuItems a:hover span:last-child,
+        .navMenuItems[data-animation] a:hover span:last-child {
+            transform: none;
         }
     }
     .buttonWrapper {
@@ -43,6 +72,7 @@
         justify-content: center;
         button {
             margin: 1em;
+            padding: 6px 20px;
             border-radius: 10px;
             background-color: transparent;
             color: rgba(250, 229, 150, 1);

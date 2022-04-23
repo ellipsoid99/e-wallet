@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SidebarData } from "./SidebarData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Layout.module.scss";
 
-const Navbar = (props) => {
-    const onLogoutClick = (e) => {
-        e.preventDefault();
-        props.logoutUser();
-    };
-
+const Navbar = () => {
+    const dispatch = useDispatch();
     return (
         <>
             <nav className={styles.navMenu}>
@@ -28,6 +25,7 @@ const Navbar = (props) => {
                             return (
                                 <li key={index}>
                                     <Link to={item.path}>
+                                        <span>{item.icon}</span>
                                         <span>{item.title}</span>
                                     </Link>
                                 </li>
@@ -37,44 +35,13 @@ const Navbar = (props) => {
                 </div>
 
                 <div className={styles.buttonWrapper}>
-                    <button
-                        onClick={(e) => onLogoutClick(e)}
-                        className="btn btn-large"
-                    >
-                        Logout
+                    <button onClick={() => dispatch(logoutUser())}>
+                        <FontAwesomeIcon icon={faRightFromBracket} />
                     </button>
                 </div>
             </nav>
         </>
-
-        // <div className="navbar-fixed">
-        //     <nav className="z-depth-0">
-        //         <div className="nav-wrapper white">
-        //             <Link
-        //                 to="/"
-        //                 style={{
-        //                     fontFamily: "monospace",
-        //                 }}
-        //                 className="col s5 brand-logo center black-text"
-        //             >
-        //                 <i className="material-icons">code</i>
-        //                 BANKABLE
-        //             </Link>
-        //             <div className="button-wrapper">
-        //                 <button
-        //                     onClick={(e) => onLogoutClick(e)}
-        //                     className="btn btn-large"
-        //                 >
-        //                     Logout
-        //                 </button>
-        //             </div>
-        //         </div>
-        //     </nav>
-        // </div>
     );
 };
-const mapStateToProps = (state) => ({
-    auth: state.auth,
-});
 
-export default connect(mapStateToProps, { logoutUser })(Navbar);
+export default Navbar;

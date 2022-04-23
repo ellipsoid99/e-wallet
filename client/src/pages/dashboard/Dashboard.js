@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import DashboardComponent from "components/dashboard";
 
 const Dashboard = () => {

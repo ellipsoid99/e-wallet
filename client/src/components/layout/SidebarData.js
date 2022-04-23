@@ -1,12 +1,18 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faMoneyBillTransfer,
+    faLandmark,
+} from "@fortawesome/free-solid-svg-icons";
+
 export const SidebarData = [
     {
-        title: "Dashboard",
+        title: "Home",
         path: "/dashboard",
-        cName: "nav-text",
+        icon: <FontAwesomeIcon icon={faLandmark} />,
     },
     {
         title: "Payments",
         path: "/payments",
-        cName: "nav-text",
+        icon: <FontAwesomeIcon icon={faMoneyBillTransfer} />,
     },
 ];

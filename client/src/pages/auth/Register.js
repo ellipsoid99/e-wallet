@@ -25,7 +25,7 @@ const Register = () => {
         if (auth.isAuthenticated) {
             history.push("/dashboard");
         }
-    }, []);
+    });
     useEffect(() => {
         setModalShow(true);
     }, [success]);
