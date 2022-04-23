@@ -161,6 +161,23 @@ router.get("/:accountnumber", (req, res) => {
         });
 });
 
+router.get("/:accountnumber", (req, res) => {
+    let data = {};
+    const accNo = req.params.accountnumber;
+    console.log(accNo);
+
+    User.find({ accountnumber: accNo })
+        .then((result) => {
+            res.status(200).json({ data: result });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+                error: err,
+            });
+        });
+});
+
 router.post("/payments", (req, res) => {
     const senderaccNo = req.body.senderAccountNumber;
     const receiveraccNo = req.body.receiverAccountNumber;
