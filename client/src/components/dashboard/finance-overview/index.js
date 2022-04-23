@@ -1,30 +1,43 @@
-import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
+import styles from "../Dashboard.module.scss";
 
 const FinanceOverview = (props) => {
     return (
-        <div className="outerWrapper">
-            <div className="headerWrapper">FINANCE SUMMARY</div>
+        <div className={styles.outerWrapper}>
+            <div className={styles.headerWrapper}>FINANCE SUMMARY</div>
 
-            <Row>
-                <Col md={2} className="summary">
-                    <div className="summaryItem">
-                        <h2 className="summaryHeader">Balance: </h2>
-                        <h1 className="summaryValue">
-                            {props.data[0].transaction.balance} INR
+            <Row className={styles.summary}>
+                <Col md={6}>
+                    <div className={styles.summaryItem}>
+                        <h2 className={styles.Header}>Balance: </h2>
+                        <h1 className={styles.Value}>
+                            {props.data.balance} INR
                         </h1>
                     </div>
-                    <div className="summaryItem">
-                        <h2 className="summaryHeader">Deposites: </h2>
-                        <h1 className="summaryValue">100.00</h1>
+                    <div className={styles.summaryItem}>
+                        <h2 className={styles.Header}>Deposites: </h2>
+                        <h1 className={styles.Value}>100.00</h1>
                     </div>
-                    <div className="summaryItem">
-                        <h2 className="summaryHeader">Withdrawals: </h2>
-                        <h1 className="summaryValue">100.00</h1>
+                    <div className={styles.summaryItem}>
+                        <h2 className={styles.Header}>Withdrawals: </h2>
+                        <h1 className={styles.Value}>100.00</h1>
                     </div>
                 </Col>
-                <Col md={10} className="other">
-                    Do SOMETHING HERE!
+                <Col md={6}>
+                    <div className={styles.summaryItem}>
+                        <h2 className={styles.Header}>Balance: </h2>
+                        <h1 className={styles.Value}>
+                            {props.data.balance} INR
+                        </h1>
+                    </div>
+                    <div className={styles.summaryItem}>
+                        <h2 className={styles.Header}>Deposites: </h2>
+                        <h1 className={styles.Value}>100.00</h1>
+                    </div>
+                    <div className={styles.summaryItem}>
+                        <h2 className={styles.Header}>Withdrawals: </h2>
+                        <h1 className={styles.Value}>100.00</h1>
+                    </div>
                 </Col>
             </Row>
         </div>

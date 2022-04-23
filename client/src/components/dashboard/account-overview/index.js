@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
+import styles from "../Dashboard.module.scss";
 
 const AccountOverview = (props) => {
     //  Date Time
     const locale = "en";
-    const [today, setDate] = React.useState(new Date());
+    const [today, setDate] = useState(new Date());
     useEffect(() => {
         const timer = setInterval(() => {
             setDate(new Date());
@@ -26,22 +27,21 @@ const AccountOverview = (props) => {
 
     return (
         <>
-            <div className="outerWrapper">
-                <div className="headingWrapper">
-                    <h3 className="date">{date}</h3>
-                    <h3 className="time">{time}</h3>
-                </div>
-                <div className="bodyWrapper">
-                    <div className="imageWrapper">
-                        <img src="https://via.placeholder.com/100" />
+            <div className={styles.darkBackground}>
+                <div className={styles.content}>
+                    <div className={styles.headingWrapper}>
+                        <h3 className={styles.date}>{date}</h3>
+                        <h3 className={styles.time}>{time}</h3>
                     </div>
-                    <div className="textWrapper">
+                    <div className={styles.textWrapper}>
                         <h5>Welcome</h5>
                         <h3>
-                            {props.data[0].firstname} {props.data[0].lastname}
+                            {props.data.firstname} {props.data.lastname}
                         </h3>
-                        <h4>{props.data[0].accountnumber} </h4>
-                        <p className="message">Hope you're doing well!!</p>
+                        <h4>{props.data.accountnumber} </h4>
+                        <p className={styles.message}>
+                            Hope you're doing well!!
+                        </p>
                     </div>
                 </div>
             </div>
