@@ -61,7 +61,7 @@ const UserSchema = new Schema ({
         },
         paymentSession:{
             type:Boolean,
-            required:false,
+            default:false,
         }
 })
 

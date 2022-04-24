@@ -161,35 +161,46 @@ router.get("/:accountnumber", (req, res) => {
         });
 });
 
-router.get("/:accountnumber", (req, res) => {
-    let data = {};
-    const accNo = req.params.accountnumber;
-    console.log(accNo);
+// router.get("/:accountnumber", (req, res) => {
+//     let data = {};
+//     const accNo = req.params.accountnumber;
+//     console.log(accNo);
 
-    User.find({ accountnumber: accNo })
-        .then((result) => {
-            res.status(200).json({ data: result });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json({
-                error: err,
-            });
-        });
-});
+//     User.find({ accountnumber: accNo })
+//         .then((result) => {
+//             res.status(200).json({ data: result });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//             res.status(500).json({
+//                 error: err,
+//             });
+//         });
+// });
 
 router.post("/payments", (req, res) => {
     const senderaccNo = req.body.senderAccountNumber;
     const receiveraccNo = req.body.receiverAccountNumber;
     const amt = req.body.amount;
     //const date = req.body.date;
-
+    
+    if(senderaccNo === receiveraccNo)
+    {
+      res.status(201).json({});
+    }
+    else{
+    
     User.findOne({ accountnumber: senderaccNo })
         .then((sender) => {
+
+          if(sender.paymentSession===false)
+          {
+            res.status(205).json({})
+          }
+          else{
+
             if (amt > sender.transaction.balance) {
-                res.status(500).json({
-                    error: "Insufficient balance",
-                });
+                res.status(202).json({});
             } else {
                 //sender
                 sender.transaction.balance = sender.transaction.balance - amt;
@@ -223,6 +234,9 @@ router.post("/payments", (req, res) => {
                         },
                     },
                     (err, doc) => {
+                      // res.status(500).json({
+                      //   error: "error updating user db",
+                      //   });
                         if (err) console.log("error updating user db", err);
                         console.log(doc);
                     }
@@ -235,7 +249,7 @@ router.post("/payments", (req, res) => {
                             +receiver.transaction.balance + +amt;
                         const newtransactions = {
                             to: receiveraccNo,
-                            fromt: senderaccNo,
+                            from: senderaccNo,
                             date: new Date(),
                             flag: true,
                             amount: amt,
@@ -266,28 +280,52 @@ router.post("/payments", (req, res) => {
                                 },
                             },
                             (err, doc) => {
-                                if (err)
-                                    console.log("error updating user db", err);
-                                // console.log(doc)
+                              // res.status(500).json({
+                              //   error: "error updating user db",
+                              //   });
+                                if (err) console.log("error updating user db", err);
+                                console.log(doc);
                             }
                         );
+
+                        User.findOneAndUpdate(
+                          {
+                            accountnumber: senderaccNo,
+                          },
+                          {
+                              $set: {
+                                  paymentSession: false
+                              },
+                          },
+                          (err, doc) => {
+                            // res.status(500).json({
+                            //   error: "error updating user db",
+                            //   });
+                              if (err) console.log("error updating user db", err);
+                              console.log(doc);
+                          }
+                      );
                         res.status(200).json({ data: { sender, receiver } });
                     })
                     .catch((err) => {
-                        console.log(err);
-                        res.status(500).json({
-                            error: err,
-                        });
+                        res.status(202).json({data:err});
                     });
+                    sender.paymentSession=false;
             }
+          }
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({
-                error: err,
-            });
-        });
-});
+            res.status(203).json({data:err});
+        })
+      };
+})
+
+function secureSession(paymentSession){
+
+  
+}
+
 // function expires(accNo){
 //   User.find({accNo}).then(result=>{
 
@@ -300,46 +338,47 @@ router.post("/payments", (req, res) => {
 //     })
 //   }
 // }
-// router.get('/securepayment',(req,res)=>{
+router.post('/securepayment',(req,res)=>{
 
-//     const accNo=req.body.accountnumber;
-//     User.findOne({accountnumber:accNo}).then(user=>{
+    const accNo=req.body.accountnumber;
+    User.findOne({accountnumber:accNo}).then(user=>{
+  
+      console.log("-------")
+      if(user.paymentSession===true)
+      {
+        console.log("PAYMENT NOT SECURE")
+        res.status(201).json({data:"PAYMENT NOT SECURE"});
+      }
+      else
+      {
+        User.findOneAndUpdate(
+          {
+              accountnumber: accNo,
+          },
+          {
+              $set: {
+                  paymentSession: true
+              },
+          },
+          (err, doc) => {
+            // res.status(500).json({
+            //   error: "error updating user db",
+            //   });
+              if (err) console.log("error updating user db", err);
+              console.log(doc);
+          }
+      );
+          //user.paymentSession=true
+          res.status(400).json({data:"PAYMENT SECURE"});
 
-//       if(user.paymentSession===true)
-//       {
-//         res.status(201).json({})
-//       }
-//       else
-//       {
-// user.paymentSession=true
-//   User.findOneAndUpdate(
-//     {
-//       accountnumber:accNo
-//     },
-//     {
-//       $set:{
-//         paymentSession:true
-//       },
-//     },
-//     (err,doc) =>{
-//       if(err)console.log("error updating user db",err)
-//       console.log(doc)
-//     }
-//     )
+      }
+    }).catch((err) => {
+      console.log(err);
+      res.status(203).json({data:err});
+    });
+});
 
-//   // res.status(201).json({"session available"})
-//   // let timeout = setTimeout(expires,50000000)
 
-// }
-// res.status(200).json({data:user})
-//     }
-//   })
-//     .catch(err=>{
-//       console.log(err);
-//       res.status(500).json({
-//         error:err
-//       })
-//     });
-// });
+  
 
 module.exports = router;

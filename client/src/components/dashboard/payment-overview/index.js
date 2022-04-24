@@ -38,6 +38,7 @@ const columns = [
         name: "Timestamp",
         selector: (row) => moment(row.date).format("MMMM Do YYYY, h:mm:ss a"),
         grow: 2,
+        sortable:true,
     },
     {
         name: "To",
