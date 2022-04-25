@@ -1,15 +1,11 @@
-import PaymentProgress from "./PaymentProgress";
-import PaymentForm from "./PaymentForm";
+import PaymentSecure from "./PaymentSecure";
 import styles from "./Payment.module.scss";
 
 const PaymentsComponent = () => {
     return (
         <div className={`${styles.wrapper} gradientBase`}>
             <div className={styles.formContainer}>
-                <PaymentForm />
-            </div>
-            <div className={styles.otherContainer}>
-                <PaymentProgress />
+                <PaymentSecure />
             </div>
         </div>
     );

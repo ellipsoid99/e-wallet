@@ -9,7 +9,6 @@
         "@fortawesome/react-fontawesome": "^0.1.18",
         "axios": "^0.26.1",
         "bootstrap": "^5.1.3",
-        "classnames": "^2.2.6",
         "e-wallet": "file:..",
         "jwt-decode": "^3.1.2",
         "mern-auth": "file:..",
@@ -22,8 +21,7 @@
         "react-scripts": "5.0.0",
         "redux": "^4.0.1",
         "redux-thunk": "^2.4.1",
-        "sass": "^1.50.0",
-        "styled-components": "^5.3.5"
+        "sass": "^1.50.0"
     },
     "scripts": {
         "start": "react-scripts start",

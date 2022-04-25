@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -161,224 +160,276 @@ router.get("/:accountnumber", (req, res) => {
         });
 });
 
-// router.get("/:accountnumber", (req, res) => {
-//     let data = {};
-//     const accNo = req.params.accountnumber;
-//     console.log(accNo);
-
-//     User.find({ accountnumber: accNo })
-//         .then((result) => {
-//             res.status(200).json({ data: result });
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//             res.status(500).json({
-//                 error: err,
-//             });
-//         });
-// });
-
 router.post("/payments", (req, res) => {
     const senderaccNo = req.body.senderAccountNumber;
     const receiveraccNo = req.body.receiverAccountNumber;
     const amt = req.body.amount;
-    //const date = req.body.date;
-    
-    if(senderaccNo === receiveraccNo)
-    {
-      res.status(201).json({});
-    }
-    else{
-    
-    User.findOne({ accountnumber: senderaccNo })
-        .then((sender) => {
-
-          if(sender.paymentSession===false)
-          {
-            res.status(205).json({})
-          }
-          else{
-
-            if (amt > sender.transaction.balance) {
-                res.status(202).json({});
-            } else {
-                //sender
-                sender.transaction.balance = sender.transaction.balance - amt;
-                const newtransactions = {
-                    to: receiveraccNo,
-                    from: senderaccNo,
-                    date: new Date(),
-                    flag: false,
-                    amount: amt,
-                };
-                console.log("SENDER", newtransactions);
-                sender.transaction.transactions.push(newtransactions);
-                console.log(
-                    "ARRAY SENDER TRANSACTIONS",
-                    sender.transaction.transactions
-                );
-                console.log(sender);
-
-                //UPDATE sender db
-
-                User.findOneAndUpdate(
-                    {
-                        accountnumber: senderaccNo,
-                    },
-                    {
-                        $set: {
-                            transaction: {
-                                balance: sender.transaction.balance,
-                                transactions: sender.transaction.transactions,
-                            },
-                        },
-                    },
-                    (err, doc) => {
-                      // res.status(500).json({
-                      //   error: "error updating user db",
-                      //   });
-                        if (err) console.log("error updating user db", err);
-                        console.log(doc);
-                    }
-                );
-
-                //receiver
-                User.findOne({ accountnumber: receiveraccNo })
-                    .then((receiver) => {
-                        receiver.transaction.balance =
-                            +receiver.transaction.balance + +amt;
+    if (senderaccNo === receiveraccNo) {
+        res.status(201).json({});
+    } else {
+        User.findOne({ accountnumber: senderaccNo })
+            .then((sender) => {
+                if (sender.paymentSession === false) {
+                    res.status(205).json({});
+                } else {
+                    if (amt > sender.transaction.balance) {
+                        res.status(202).json({});
+                    } else {
+                        //sender
+                        sender.transaction.balance =
+                            sender.transaction.balance - amt;
                         const newtransactions = {
                             to: receiveraccNo,
                             from: senderaccNo,
                             date: new Date(),
-                            flag: true,
+                            flag: false,
                             amount: amt,
                         };
-
-                        console.log("RECEIVER", newtransactions);
-                        receiver.transaction.transactions.push(newtransactions);
+                        console.log("SENDER", newtransactions);
+                        sender.transaction.transactions.push(newtransactions);
                         console.log(
-                            "ARRAY RECEIVER TRANSACTIONS",
-                            receiver.transaction.transactions
+                            "ARRAY SENDER TRANSACTIONS",
+                            sender.transaction.transactions
                         );
-                        console.log(receiver);
+                        console.log(sender);
 
-                        console.log(typeof receiver.transaction.transactions);
-                        //UPDATE receiver db
+                        //UPDATE sender db
 
                         User.findOneAndUpdate(
                             {
-                                accountnumber: receiveraccNo,
+                                accountnumber: senderaccNo,
                             },
                             {
                                 $set: {
                                     transaction: {
-                                        balance: receiver.transaction.balance,
+                                        balance: sender.transaction.balance,
                                         transactions:
-                                            receiver.transaction.transactions,
+                                            sender.transaction.transactions,
                                     },
                                 },
                             },
                             (err, doc) => {
-                              // res.status(500).json({
-                              //   error: "error updating user db",
-                              //   });
-                                if (err) console.log("error updating user db", err);
+                                if (err)
+                                    console.log("error updating user db", err);
                                 console.log(doc);
                             }
                         );
 
-                        User.findOneAndUpdate(
-                          {
-                            accountnumber: senderaccNo,
-                          },
-                          {
-                              $set: {
-                                  paymentSession: false
-                              },
-                          },
-                          (err, doc) => {
-                            // res.status(500).json({
-                            //   error: "error updating user db",
-                            //   });
-                              if (err) console.log("error updating user db", err);
-                              console.log(doc);
-                          }
-                      );
-                        res.status(200).json({ data: { sender, receiver } });
-                    })
-                    .catch((err) => {
-                        res.status(202).json({data:err});
-                    });
-                    sender.paymentSession=false;
-            }
-          }
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(203).json({data:err});
-        })
-      };
-})
+                        //receiver
+                        User.findOne({ accountnumber: receiveraccNo })
+                            .then((receiver) => {
+                                receiver.transaction.balance =
+                                    +receiver.transaction.balance + +amt;
+                                const newtransactions = {
+                                    to: receiveraccNo,
+                                    from: senderaccNo,
+                                    date: new Date(),
+                                    flag: true,
+                                    amount: amt,
+                                };
 
-function secureSession(paymentSession){
+                                console.log("RECEIVER", newtransactions);
+                                receiver.transaction.transactions.push(
+                                    newtransactions
+                                );
+                                console.log(
+                                    "ARRAY RECEIVER TRANSACTIONS",
+                                    receiver.transaction.transactions
+                                );
+                                console.log(receiver);
 
-  
-}
+                                console.log(
+                                    typeof receiver.transaction.transactions
+                                );
+                                //UPDATE receiver db
 
-// function expires(accNo){
-//   User.find({accNo}).then(result=>{
+                                User.findOneAndUpdate(
+                                    {
+                                        accountnumber: receiveraccNo,
+                                    },
+                                    {
+                                        $set: {
+                                            transaction: {
+                                                balance:
+                                                    receiver.transaction
+                                                        .balance,
+                                                transactions:
+                                                    receiver.transaction
+                                                        .transactions,
+                                            },
+                                        },
+                                    },
+                                    (err, doc) => {
+                                        if (err)
+                                            console.log(
+                                                "error updating user db",
+                                                err
+                                            );
+                                        console.log(doc);
+                                    }
+                                );
 
-//     result.paymentSession=false;
-//   })
-//   .catch(err=>{
-//     console.log(err);
-//     res.status(500).json({
-//       error:err
-//     })
-//   }
-// }
-router.post('/securepayment',(req,res)=>{
-
-    const accNo=req.body.accountnumber;
-    User.findOne({accountnumber:accNo}).then(user=>{
-  
-      console.log("-------")
-      if(user.paymentSession===true)
-      {
-        console.log("PAYMENT NOT SECURE")
-        res.status(201).json({data:"PAYMENT NOT SECURE"});
-      }
-      else
-      {
-        User.findOneAndUpdate(
-          {
-              accountnumber: accNo,
-          },
-          {
-              $set: {
-                  paymentSession: true
-              },
-          },
-          (err, doc) => {
-            // res.status(500).json({
-            //   error: "error updating user db",
-            //   });
-              if (err) console.log("error updating user db", err);
-              console.log(doc);
-          }
-      );
-          //user.paymentSession=true
-          res.status(400).json({data:"PAYMENT SECURE"});
-
-      }
-    }).catch((err) => {
-      console.log(err);
-      res.status(203).json({data:err});
-    });
+                                User.findOneAndUpdate(
+                                    {
+                                        accountnumber: senderaccNo,
+                                    },
+                                    {
+                                        $set: {
+                                            paymentSession: false,
+                                        },
+                                    },
+                                    (err, doc) => {
+                                        if (err)
+                                            console.log(
+                                                "error updating user db",
+                                                err
+                                            );
+                                        console.log(doc);
+                                    }
+                                );
+                                res.status(200).json({
+                                    data: { sender, receiver },
+                                });
+                            })
+                            .catch((err) => {
+                                res.status(202).json({ data: err });
+                            });
+                        sender.paymentSession = false;
+                    }
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(203).json({ data: err });
+            });
+    }
 });
 
+//  Session APIs
 
-  
+router.post("/checksession", (req, res) => {
+    const accNo = req.body.accountnumber;
+    User.findOne({ accountnumber: accNo })
+        .then((user) => {
+            var session = user.paymentSession;
+            if (session) {
+                res.status(201).json({
+                    data: {
+                        context_code: 1000,
+                        session,
+                        message: "Session already secured",
+                    },
+                });
+            } else {
+                res.status(201).json({
+                    data: {
+                        context_code: 1000,
+                        session,
+                        message:
+                            "Session not secured, would you like to secure a payment session",
+                    },
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(201).json({
+                data: {
+                    context_code: 1200,
+                    message: "Session not fetched",
+                    error: err,
+                },
+            });
+        });
+});
+
+router.post("/abortsession", (req, res) => {
+    const accNo = req.body.accountnumber;
+    User.findOne({ accountnumber: accNo })
+        .then((user) => {
+            var session = user.paymentSession;
+            if (session) {
+                User.findOneAndUpdate(
+                    {
+                        accountnumber: accNo,
+                    },
+                    {
+                        $set: {
+                            paymentSession: false,
+                        },
+                    },
+                    (err, doc) => {
+                        if (err) console.log("error updating user db", err);
+                        console.log(doc);
+                    }
+                );
+                res.status(201).json({
+                    data: { context_code: 1000, message: "Session Aborted" },
+                });
+            } else {
+                res.status(201).json({
+                    data: {
+                        context_code: 1100,
+                        message: "Session not in progress",
+                    },
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(201).json({
+                data: {
+                    context_code: 1200,
+                    message: "Session not fetched",
+                    error: err,
+                },
+            });
+        });
+});
+
+router.post("/securesession", (req, res) => {
+    const accNo = req.body.accountnumber;
+    User.findOne({ accountnumber: accNo })
+        .then((user) => {
+            var session = user.paymentSession;
+            if (session) {
+                res.status(201).json({
+                    data: {
+                        context_code: 1100,
+                        message:
+                            "Session already secure, transaction already underway",
+                    },
+                });
+            } else {
+                User.findOneAndUpdate(
+                    {
+                        accountnumber: accNo,
+                    },
+                    {
+                        $set: {
+                            paymentSession: true,
+                        },
+                    },
+                    (err, doc) => {
+                        if (err) console.log("error updating user db", err);
+                        console.log(doc);
+                    }
+                );
+                res.status(201).json({
+                    data: {
+                        context_code: 1000,
+                        message: "Session secured, proceed to transaction",
+                    },
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(201).json({
+                data: {
+                    context_code: 1200,
+                    message: "Session not fetched",
+                    error: err,
+                },
+            });
+        });
+});
 
 module.exports = router;

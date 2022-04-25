@@ -1,0 +1,2 @@
+1.) error if trailing or following spaces in fields (UI)
+2.) 
