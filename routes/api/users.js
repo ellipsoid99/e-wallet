@@ -105,7 +105,7 @@ router.post("/register", async (req, res) => {
             if (!user) {
                 return res
                     .status(404)
-                    .json({ emailnotfound: "User is not registered" });
+                    .json({ usernotfound: "User is not registered" });
             }
 
             // Check password
