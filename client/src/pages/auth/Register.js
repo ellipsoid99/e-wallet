@@ -36,11 +36,11 @@ const Register = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         const newUser = {
-            firstname: state.firstname,
-            lastname: state.lastname,
-            phoneNumber: state.phoneNumber,
-            password: state.password,
-            password2: state.password2,
+            firstname: state.firstname.trim(),
+            lastname: state.lastname.trim(),
+            phoneNumber: state.phoneNumber.trim(),
+            password: state.password.trim(),
+            password2: state.password2.trim(),
         };
         dispatch(
             registerUser(newUser, (result) => {

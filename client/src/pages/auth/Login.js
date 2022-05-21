@@ -28,8 +28,8 @@ const Login = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         const userData = {
-            accountnumber: state.accountnumber,
-            password: state.password,
+            accountnumber: state.accountnumber.trim(),
+            password: state.password.trim(),
         };
         console.log("from onsubmit", userData);
         dispatch(loginUser(userData));
