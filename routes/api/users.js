@@ -158,6 +158,25 @@ router.get("/:accountnumber", (req, res) => {
     });
 });
 
+//get loginCount
+router.get("/loginCount/:accountnumber", (req, res) => {
+  const accNo = req.body.accountnumber;
+
+  User.find({ accountnumber: accNo })
+    .then((result) => {
+      var count = result;
+      // console.log(count);
+      res.status(200).json({
+        logincount: count[0].loggedInCount,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+});
 //logout
 
 router.post("/logout", (req, res) => {
