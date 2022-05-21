@@ -26,9 +26,6 @@ router.post("/register", async (req, res) => {
   }
   var result = req.body;
   var accNum = await AccountNumber.find();
-  // console.log(">>>",accNum[0])
-  // console.log(">>>>>>>>>>>>>>>>",accNum[0].accountNumber);
-  // console.log(">>>>>>>>>>>>>>>>",typeof accNum[0].accountNumber);
 
   var val = accNum[0].accountNumber + 1;
   // console.log(">>>>", val);
@@ -45,12 +42,6 @@ router.post("/register", async (req, res) => {
   result.accountnumber = val;
 
   const user = new User(result);
-
-  // const newUser = new User({
-  //         name: req.body.name,
-  //         email: req.body.email,
-  //         password: req.body.password
-  //       });
 
   // Hash password before saving in database
   bcrypt.genSalt(10, (err, salt) => {
@@ -79,7 +70,6 @@ router.post("/register", async (req, res) => {
 
     const accountnumber = req.body.accountnumber;
     const password = req.body.password;
-    // var logCount = req.body.loggedInCount;
 
     // Find user by email
     User.findOne({ accountnumber }).then((user) => {
@@ -91,8 +81,6 @@ router.post("/register", async (req, res) => {
       // Check password
       bcrypt.compare(password, user.password).then((isMatch) => {
         if (isMatch) {
-          // User matched
-          // Create JWT Payload
           const payload = {
             id: user.id,
             name: user.firstname,
@@ -139,8 +127,8 @@ router.post("/register", async (req, res) => {
       });
     });
   });
-//get user details
 
+//get user details
 router.get("/:accountnumber", (req, res) => {
   let data = {};
   const accNo = req.params.accountnumber;
@@ -161,11 +149,9 @@ router.get("/:accountnumber", (req, res) => {
 //get loginCount
 router.get("/loginCount/:accountnumber", (req, res) => {
   const accNo = req.body.accountnumber;
-
   User.find({ accountnumber: accNo })
     .then((result) => {
       var count = result;
-      // console.log(count);
       res.status(200).json({
         logincount: count[0].loggedInCount,
       });
@@ -177,21 +163,15 @@ router.get("/loginCount/:accountnumber", (req, res) => {
       });
     });
 });
-//logout
 
+//logout
 router.post("/logout", (req, res) => {
   const accountnumber = req.body.accountnumber;
-  // var logCount = req.body.loggedInCount;
-
-  // Find user by email
   User.findOne({ accountnumber }).then((user) => {
-    // Check if user exists
     var logCount = user.loggedInCount;
-    console.log(">>>>>>>", logCount);
     if (logCount > 0) {
       logCount = logCount - 1;
     }
-    console.log(">>>>>>>", logCount);
     User.findOneAndUpdate(
       {
         accountnumber: accountnumber,
@@ -209,8 +189,8 @@ router.post("/logout", (req, res) => {
     return res.status(500).json({ user });
   });
 });
-//get user details
 
+//get user details
 router.get("/:accountnumber", (req, res) => {
   let data = {};
   const accNo = req.params.accountnumber;
@@ -252,16 +232,8 @@ router.post("/payments", (req, res) => {
               flag: false,
               amount: amt,
             };
-            console.log("SENDER", newtransactions);
             sender.transaction.transactions.push(newtransactions);
-            console.log(
-              "ARRAY SENDER TRANSACTIONS",
-              sender.transaction.transactions
-            );
-            console.log(sender);
-
-            //UPDATE sender db
-
+            //Update sender db
             User.findOneAndUpdate(
               {
                 accountnumber: senderaccNo,
@@ -276,7 +248,6 @@ router.post("/payments", (req, res) => {
               },
               (err, doc) => {
                 if (err) console.log("error updating user db", err);
-                console.log(doc);
               }
             );
 
@@ -292,18 +263,8 @@ router.post("/payments", (req, res) => {
                   flag: true,
                   amount: amt,
                 };
-
-                console.log("RECEIVER", newtransactions);
                 receiver.transaction.transactions.push(newtransactions);
-                console.log(
-                  "ARRAY RECEIVER TRANSACTIONS",
-                  receiver.transaction.transactions
-                );
-                console.log(receiver);
-
-                console.log(typeof receiver.transaction.transactions);
-                //UPDATE receiver db
-
+                //Update receiver db
                 User.findOneAndUpdate(
                   {
                     accountnumber: receiveraccNo,
@@ -318,10 +279,8 @@ router.post("/payments", (req, res) => {
                   },
                   (err, doc) => {
                     if (err) console.log("error updating user db", err);
-                    console.log(doc);
                   }
                 );
-
                 User.findOneAndUpdate(
                   {
                     accountnumber: senderaccNo,
@@ -333,7 +292,6 @@ router.post("/payments", (req, res) => {
                   },
                   (err, doc) => {
                     if (err) console.log("error updating user db", err);
-                    console.log(doc);
                   }
                 );
                 res.status(200).json({
@@ -348,14 +306,12 @@ router.post("/payments", (req, res) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         res.status(203).json({ data: err });
       });
   }
 });
 
 //  Session APIs
-
 router.post("/checksession", (req, res) => {
   const accNo = req.body.accountnumber;
   User.findOne({ accountnumber: accNo })
