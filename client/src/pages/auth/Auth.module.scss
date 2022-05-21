@@ -1,6 +1,6 @@
 .base {
     background: #c4b9b590;
-    background-image: url("http://localhost:3000/background.png");
+    background-image: url("http://localhost:3000/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -22,12 +22,13 @@
     border-radius: 5px;
     padding: 10rem 0;
     margin: 0 3rem;
-    background: linear-gradient(
-        0deg,
-        rgba(250, 229, 150, 0.8) 10%,
-        rgba(63, 176, 172, 0.8) 50%,
-        rgba(23, 62, 67, 0.8) 100%
-    );
+    // background: linear-gradient(
+    //     0deg,
+    //     rgba(250, 229, 150, 0.8) 10%,
+    //     rgba(63, 176, 172, 0.8) 50%,
+    //     rgba(23, 62, 67, 0.8) 100%
+    // );
+    backdrop-filter: blur(15px);
     box-shadow: none;
     .header {
         display: flex;
@@ -88,7 +89,7 @@
 .modal {
     height: 100vh;
     background: #c4b9b590;
-    background-image: url("http://localhost:3000/background.png");
+    background-image: url("http://localhost:3000/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     .modalContent {
@@ -99,7 +100,7 @@
                 rgba(63, 176, 172, 0.5) 80%,
                 rgba(23, 62, 67, 0.5) 100%
             ),
-            url("http://localhost:3000/background.png");
+            url("http://localhost:3000/background.jpg");
         background-size: cover;
         background-repeat: no-repeat;
     }

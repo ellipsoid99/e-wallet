@@ -14,12 +14,12 @@ code {
 }
 .base {
     height: 100vh;
-    background: #c4b9b5;
+    background: #e8e8e8;
 }
 .gradientBase {
     height: 100vh;
-    background: #c4b9b590;
-    background-image: url("http://localhost:3000/background.png");
+    background: white;
+    background-image: url("http://localhost:3000/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
