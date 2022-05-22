@@ -20,24 +20,27 @@
     border-radius: 5px;
     padding: 10rem 0;
     margin: 0 3rem;
-    background: linear-gradient(
-        180deg,
-        rgba(250, 229, 150, 1) 30%,
-        rgba(63, 176, 172, 1) 80%,
-        rgba(23, 62, 67, 1) 100%
-    );
+    // background: linear-gradient(
+    //     180deg,
+    //     rgba(250, 229, 150, 1) 30%,
+    //     rgba(63, 176, 172, 1) 80%,
+    //     rgba(23, 62, 67, 1) 100%
+    // );
+    backdrop-filter: blur(25px);
     box-shadow: none;
     .wrapperHeader {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         width: 80%;
+        text-shadow: 0 0 2px #000000;
         .heading {
             text-align: center;
             text-transform: uppercase;
-            font-size: 24px;
+            font-size: 32px;
             width: 100%;
-            color: rgba(23, 62, 67);
+            color: white;
+            text-shadow: 0 0 2px #000000;
             word-wrap: break-word;
         }
     }
@@ -46,6 +49,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        text-shadow: 0 0 2px #fff;
         p {
             padding: 12px;
             margin: 12px;

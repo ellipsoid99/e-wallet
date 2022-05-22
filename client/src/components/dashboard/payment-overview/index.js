@@ -13,12 +13,8 @@ const customStyles = {
     },
     headRow: {
         style: {
-            background: `linear-gradient(
-                90deg,
-                rgba(250, 229, 150, 1) 30%,
-                rgba(63, 176, 172, 1) 80%,
-                rgba(23, 62, 67, 1) 100%
-            )`,
+            background: "black",
+            color: "white",
         },
     },
     rows: {
@@ -38,7 +34,7 @@ const columns = [
         name: "Timestamp",
         selector: (row) => moment(row.date).format("MMMM Do YYYY, h:mm:ss a"),
         grow: 2,
-        sortable:true,
+        sortable: true,
     },
     {
         name: "To",

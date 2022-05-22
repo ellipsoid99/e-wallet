@@ -28,7 +28,6 @@ const PaymentForm = () => {
             receiverAccountNumber: formData.to,
             amount: formData.amount,
         });
-        console.log("inside payments", reqBody);
         const getData = () => {
             axios
                 .post(`${url}payments`, reqBody)

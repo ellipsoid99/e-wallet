@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "qs";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
@@ -23,8 +24,6 @@ export const loginUser = (userData) => (dispatch) => {
     axios
         .post("/api/users/login", userData)
         .then((res) => {
-            // Save to localStorage
-
             // Set token to localStorage
             const { token, accountnumber } = res.data;
             localStorage.setItem("jwtToken", token);
@@ -61,6 +60,15 @@ export const setUserLoading = () => {
 
 // Log user out
 export const logoutUser = () => (dispatch) => {
+    //  Call logout API
+    const accountnumber = localStorage.getItem("accountnumber");
+    const reqBody = qs.stringify({ accountnumber: accountnumber });
+    axios.post("/api/users/logout", reqBody).catch((err) =>
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data,
+        })
+    );
     // Remove token from local storage
     localStorage.removeItem("jwtToken");
     // Remove auth header for future requests
