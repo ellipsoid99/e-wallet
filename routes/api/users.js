@@ -415,7 +415,6 @@ router.post("/securesession", (req, res) => {
                     },
                     (err, doc) => {
                         if (err) console.log("error updating user db", err);
-                        console.log(doc);
                     }
                 );
                 res.status(201).json({
