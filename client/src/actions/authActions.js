@@ -59,6 +59,14 @@ export const setUserLoading = () => {
 
 // Log user out
 export const logoutUser = () => (dispatch) => {
+    //  Call logout API
+    const accNo = localStorage.getItem("accountnumber");
+    axios.post("/api/users/logout", accNo).catch((err) =>
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data,
+        })
+    );
     // Remove token from local storage
     localStorage.removeItem("jwtToken");
     // Remove auth header for future requests
