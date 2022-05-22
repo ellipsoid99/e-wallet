@@ -1,27 +1,30 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import qs from "qs";
 import { Row, Col, Card } from "react-bootstrap";
 import styles from "../Dashboard.module.scss";
 
 const FinanceOverview = (props) => {
-    const [isDataAvailable, setIsDataAvailable] = useState(false);
-
+    const [loginCount, setLoginCount] = useState(0);
     useEffect(() => {
         const accountnumber = localStorage.getItem("accountnumber");
-        const url = "/api/users/loginCount";
+        const url = `/api/users/loginCount/${accountnumber}`;
+        const reqBody = qs.stringify({ accountnumber: accountnumber });
         const getData = () => {
             axios
-                .get(`${url}${accountnumber}`)
+                .post(url, reqBody)
                 .then((res) => {
-                    const accData = res.data.data[0];
-                    console.log("data", accData);
-                    setAccountData(accData);
-                    setIsDataAvailable(true);
+                    const logData = res.data.logincount;
+                    setLoginCount(logData);
                 })
                 .catch((error) => console.error(`Errors: ${error}`));
         };
         getData();
-    }, [props]);
+        const interval = setInterval(() => {
+            getData();
+        }, 1000);
+        return () => clearInterval(interval);
+    });
     return (
         <div className={styles.outerWrapper}>
             <Row className={styles.summary}>
@@ -30,7 +33,7 @@ const FinanceOverview = (props) => {
                         <Card.Header as="h5">User Count</Card.Header>
                         <Card.Body>
                             <Card.Title>Current Logged in users</Card.Title>
-                            <Card.Text>{props.data.loggedInCount}</Card.Text>
+                            <Card.Text>{loginCount}</Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>

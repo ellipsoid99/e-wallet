@@ -18,7 +18,6 @@ const DashboardComponent = (props) => {
                 .get(`${url}${accountnumber}`)
                 .then((res) => {
                     const accData = res.data.data[0];
-                    console.log("data", accData);
                     setAccountData(accData);
                     setIsDataAvailable(true);
                 })

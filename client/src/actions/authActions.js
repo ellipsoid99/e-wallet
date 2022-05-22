@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "qs";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
@@ -60,8 +61,9 @@ export const setUserLoading = () => {
 // Log user out
 export const logoutUser = () => (dispatch) => {
     //  Call logout API
-    const accNo = localStorage.getItem("accountnumber");
-    axios.post("/api/users/logout", accNo).catch((err) =>
+    const accountnumber = localStorage.getItem("accountnumber");
+    const reqBody = qs.stringify({ accountnumber: accountnumber });
+    axios.post("/api/users/logout", reqBody).catch((err) =>
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data,
